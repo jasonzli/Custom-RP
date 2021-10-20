@@ -7,6 +7,6 @@ public class CustomRenderPipelineAsset : RenderPipelineAsset
     //Protected-> only RenderPipelineAssets can override this
     protected override RenderPipeline CreatePipeline()
     {
-        return null;
+        return new CustomeRenderPipeline();
     }
 }
