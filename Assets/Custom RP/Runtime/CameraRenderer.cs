@@ -18,10 +18,17 @@ public class CameraRenderer
         name = bufferName
     };//object initializater syntax!
 
+    CullingResults cullingResults;
+
     public void Render(ScriptableRenderContext context, Camera camera)
     {
         this.context = context;
         this.camera = camera;
+
+        if (!Cull())
+        {
+            return;
+        }
 
         Setup();
         DrawVisibleGeometry();
@@ -57,6 +64,16 @@ public class CameraRenderer
     void DrawVisibleGeometry()
     {
         context.DrawSkybox(camera); // a skippable function
+    }
+
+    bool Cull()
+    {
+        if (camera.TryGetCullingParamters(out ScriptableCullpingParameters p))
+        {
+            cullingResults = context.Cull(ref p);
+            return true;
+        }
+        return false;
     }
 
 }
