@@ -13,7 +13,7 @@ public class CustomeRenderPipeline : RenderPipeline
         ScriptableRenderContext context, Camera[] cameras
     )
     {
-        foreach (CameraRenderer camera in cameras)
+        foreach (Camera camera in cameras)
         {//This lets us divert different cameras to do different things later.
          //THis is the scriptable renderer of the URP essentially
             renderer.Render(context, camera);
