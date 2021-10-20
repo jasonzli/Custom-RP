@@ -8,7 +8,7 @@ using UnityEngine.Rendering;
 // each camera, allowing us to do different views, deferred, etc.
 public class CameraRenderer
 {
-
+    static Material errorMaterial;
     static ShaderTagId unlitShaderTagId = new ShaderTagId("SRPDefaultUnlit");
     static ShaderTagId[] legacylShaderTagIds = {
         new ShaderTagId("Always"),
@@ -110,9 +110,17 @@ public class CameraRenderer
 
     void DrawUnsupportedShaders()
     {
+        if (errorMaterial == null)
+        {
+            errorMaterial =
+                new Material(Shader.Find("Hidden/InternalErrorShader"));
+        }
         var drawingSettings = new DrawingSettings(
             legacylShaderTagIds[0], new SortingSettings(camera)
-        );
+        )
+        {
+            overrideMaterial = errorMaterial
+        };
         //SetShaderPassNames adds to the available shaders
         for (int i = 1; i < legacylShaderTagIds.Length; i++)
         {
