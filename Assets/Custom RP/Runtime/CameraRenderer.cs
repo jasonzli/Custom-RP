@@ -6,19 +6,10 @@ using UnityEngine.Rendering;
 //We can isolate that in functions
 // By having a class for camera renderer we can do whatever we want with
 // each camera, allowing us to do different views, deferred, etc.
-public class CameraRenderer
+public partial class CameraRenderer
 {
-    static Material errorMaterial;
     static ShaderTagId unlitShaderTagId = new ShaderTagId("SRPDefaultUnlit");
-    static ShaderTagId[] legacylShaderTagIds = {
-        new ShaderTagId("Always"),
-        new ShaderTagId("ForwardBase"),
-        new ShaderTagId("PrepassBase"),
-        new ShaderTagId("Vertex"),
-        new ShaderTagId("VertexLMRGBM"),
-        new ShaderTagId("VertexLM"),
 
-    };
     ScriptableRenderContext context;
     Camera camera;
 
@@ -44,7 +35,6 @@ public class CameraRenderer
         Setup();
         DrawVisibleGeometry();
         DrawUnsupportedShaders();
-
         //You need a submit on the context to draw anything
         Submit();
     }
@@ -53,7 +43,7 @@ public class CameraRenderer
     {
         //PUt this setup before clear Render target because it also clears the camera
         context.SetupCameraProperties(camera); //needed to set camera props
-        //Shows up as a Draw GL in the frame debuggers if separate from SetupCameraProperties
+                                               //Shows up as a Draw GL in the frame debuggers if separate from SetupCameraProperties
         buffer.ClearRenderTarget(true, true, Color.clear); //Depth clear, color clear, color to use);
 
         //Brings the name in the frame debugger
@@ -108,33 +98,7 @@ public class CameraRenderer
         );
     }
 
-    void DrawUnsupportedShaders()
-    {
-        if (errorMaterial == null)
-        {
-            errorMaterial =
-                new Material(Shader.Find("Hidden/InternalErrorShader"));
-        }
-        var drawingSettings = new DrawingSettings(
-            legacylShaderTagIds[0], new SortingSettings(camera)
-        )
-        {
-            overrideMaterial = errorMaterial
-        };
-        //SetShaderPassNames adds to the available shaders
-        for (int i = 1; i < legacylShaderTagIds.Length; i++)
-        {
-            drawingSettings.SetShaderPassName(i, legacylShaderTagIds[i]);
-        }
 
-        var filteringSettings = FilteringSettings.defaultValue;
-
-
-        context.DrawRenderers(
-            cullingResults, ref drawingSettings, ref filteringSettings
-        );
-
-    }
 
     bool Cull()
     {
