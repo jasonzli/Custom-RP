@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -35,6 +36,7 @@ public partial class CameraRenderer
         Setup();
         DrawVisibleGeometry();
         DrawUnsupportedShaders();
+        DrawGizmos();
         //You need a submit on the context to draw anything
         Submit();
     }

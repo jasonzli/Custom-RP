@@ -1,14 +1,17 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 
-// Each camera .Render() will draw all the geo for that camera to see.
-//We can isolate that in functions
-// By having a class for camera renderer we can do whatever we want with
-// each camera, allowing us to do different views, deferred, etc.
+//This class contains all the render functinality for Editor only 
+//and maybe development builds
 partial class CameraRenderer
 {
+    //declare empty stuff here and then full bodies in the #if section
+    partial void DrawGizmos();
     partial void DrawUnsupportedShaders();
+
+
     //or #if UNITY_EDITOR || DEVELOPMENT_BUILD
 #if UNITY_EDITOR
     static Material errorMaterial;
@@ -21,6 +24,12 @@ partial class CameraRenderer
         new ShaderTagId("VertexLM"),
 
     };
+    partial void DrawGizmos(){
+        if(Handles.ShouldRenderGizmos()){
+            context.DrawGizmos(camera, GizmoSubset.PreImageEffects);
+            context.DrawGizmos(camera, GizmoSubset.PostImageEffects);
+        }
+    }
     //This allows a method to exist only in the editor
     partial void DrawUnsupportedShaders()
     {
