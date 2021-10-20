@@ -49,7 +49,17 @@ public partial class CameraRenderer
         //PUt this setup before clear Render target because it also clears the camera
         context.SetupCameraProperties(camera); //needed to set camera props
                                                //Shows up as a Draw GL in the frame debuggers if separate from SetupCameraProperties
-        buffer.ClearRenderTarget(true, true, Color.clear); //Depth clear, color clear, color to use);
+        CameraClearFlags flags = camera.clearFlags;
+        //there's four enum flags, 1-4, Skybox, Color, Depth and Nothing
+        //there is less and less clearing for each one.
+
+        //Clear colors based on comparison. ClearRenderTarget( bool, bool, color);
+        buffer.ClearRenderTarget(
+            flags <= CameraClearFlags.Depth, //if flags is less than depth clear then yes
+            flags == CameraClearFlags.Color, //if flags is equal to clear color then yes
+            flags == CameraClearFlags.Color ?
+                camera.backgroundColor.linear : Color.clear
+            ); //Depth clear, color clear, color to use);
 
         //Brings the name in the frame debugger
         //Note that Begin and EndSamples have to match ** BY NAME **
