@@ -8,6 +8,7 @@ using UnityEngine.Rendering;
 partial class CameraRenderer
 {
     //declare empty stuff here and then full bodies in the #if section
+    partial void PrepareForSceneWindow();
     partial void DrawGizmos();
     partial void DrawUnsupportedShaders();
 
@@ -24,12 +25,21 @@ partial class CameraRenderer
         new ShaderTagId("VertexLM"),
 
     };
+
+    partial void PrepareForSceneWindow(){
+        //adds the UI to world geometry
+        if (camera.cameraType == CameraType.SceneView){
+            ScriptableRenderContext.EmitWorldGeometryForSceneView(camera);
+        }
+    }
+
     partial void DrawGizmos(){
         if(Handles.ShouldRenderGizmos()){
             context.DrawGizmos(camera, GizmoSubset.PreImageEffects);
             context.DrawGizmos(camera, GizmoSubset.PostImageEffects);
         }
     }
+
     //This allows a method to exist only in the editor
     partial void DrawUnsupportedShaders()
     {
