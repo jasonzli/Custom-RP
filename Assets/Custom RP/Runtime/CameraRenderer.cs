@@ -8,6 +8,9 @@ using UnityEngine.Rendering;
 // each camera, allowing us to do different views, deferred, etc.
 public class CameraRenderer
 {
+
+    static ShaderTagId unlitShaderTagId = new ShaderTagId("SRPDefaultUnlit");
+
     ScriptableRenderContext context;
     Camera camera;
 
@@ -63,12 +66,30 @@ public class CameraRenderer
     }
     void DrawVisibleGeometry()
     {
+        //get renderers' settings
+        //this is where the draw order is determined!
+        var sortingSettings = new SortingSettings(camera) //takes a camera, calculated based on camera
+        {
+            criteria = SortingCriteria.CommonOpaque //has a bunch of defaults, check docs
+        }; //determin ortho or distance sorting
+
+        var drawingSettings = new DrawingSettings( //takes a shader and sorting setting to render
+            unlitShaderTagId, sortingSettings
+        );
+        var filteringSettings = new FilteringSettings( //filters renderers out
+            RenderQueueRange.all
+        );
+
+        context.DrawRenderers(
+            cullingResults, ref drawingSettings, ref filteringSettings
+        );
+
         context.DrawSkybox(camera); // a skippable function
     }
 
     bool Cull()
     {
-        if (camera.TryGetCullingParamters(out ScriptableCullpingParameters p))
+        if (camera.TryGetCullingParameters(out ScriptableCullingParameters p))
         {
             cullingResults = context.Cull(ref p);
             return true;
