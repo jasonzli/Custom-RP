@@ -31,9 +31,14 @@ public class CameraRenderer
 
     void Setup()
     {
-        buffer.BeginSample(bufferName);
-        ExecuteBuffer();
+        //PUt this setup before clear Render target because it also clears the camera
         context.SetupCameraProperties(camera); //needed to set camera props
+        //Shows up as a Draw GL in the frame debuggers if separate from SetupCameraProperties
+        buffer.ClearRenderTarget(true, true, Color.clear); //Depth clear, color clear, color to use);
+
+        //Brings the name in the frame debugger
+        buffer.BeginSample(bufferName); //beginsample is its own command that is executed
+        ExecuteBuffer();//this first one is to begin the sample only
     }
 
     void Submit()
@@ -46,7 +51,7 @@ public class CameraRenderer
     //again a piece of indirection
     void ExecuteBuffer()
     {
-        context.ExecuteCommandBuffer(buffer);
+        context.ExecuteCommandBuffer(buffer); //copies commands to the buffer
         buffer.Clear(); //we clear it explicitly to reuse this memory
     }
     void DrawVisibleGeometry()
