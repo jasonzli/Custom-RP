@@ -1,7 +1,7 @@
-# A Custom RP
+# A Custom Render Pipeline for Unity
 
 Following along with Catlike Coding's guide on the custom pipeline.
-Loaded up with my own comments
+Loaded up with my own comments for learning purposes
 
 ## TO DO list
 
