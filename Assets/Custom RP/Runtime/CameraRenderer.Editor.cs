@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Profiling;
 using UnityEngine.Rendering;
 
 
@@ -16,6 +17,9 @@ partial class CameraRenderer
 
     //or #if UNITY_EDITOR || DEVELOPMENT_BUILD
 #if UNITY_EDITOR
+
+    string SampleName {get; set;}
+
     static Material errorMaterial;
     static ShaderTagId[] legacylShaderTagIds = {
         new ShaderTagId("Always"),
@@ -28,7 +32,10 @@ partial class CameraRenderer
     };
 
     partial void PrepareBuffer(){
-        buffer.name = camera.name;
+        Profiler.BeginSample("Editor Only");
+        //this is the save on memory allocations
+        buffer.name = SampleName = camera.name;
+        Profiler.EndSample();
     }
 
     partial void PrepareForSceneWindow(){
@@ -73,5 +80,8 @@ partial class CameraRenderer
         );
 
     }
+
+#else
+    string SampleName => bufferName;
 #endif
 }

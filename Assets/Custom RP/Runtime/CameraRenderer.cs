@@ -39,6 +39,7 @@ public partial class CameraRenderer
         DrawVisibleGeometry();
         DrawUnsupportedShaders();
         DrawGizmos();
+
         //You need a submit on the context to draw anything
         Submit();
     }
@@ -51,13 +52,14 @@ public partial class CameraRenderer
         buffer.ClearRenderTarget(true, true, Color.clear); //Depth clear, color clear, color to use);
 
         //Brings the name in the frame debugger
-        buffer.BeginSample(bufferName); //beginsample is its own command that is executed
+        //Note that Begin and EndSamples have to match ** BY NAME **
+        buffer.BeginSample(SampleName); //beginsample is its own command that is executed
         ExecuteBuffer();//this first one is to begin the sample only
     }
 
     void Submit()
     {
-        buffer.EndSample(bufferName);
+        buffer.EndSample(SampleName);
         ExecuteBuffer();
         context.Submit();
     }
