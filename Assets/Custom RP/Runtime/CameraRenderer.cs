@@ -76,8 +76,9 @@ public class CameraRenderer
         var drawingSettings = new DrawingSettings( //takes a shader and sorting setting to render
             unlitShaderTagId, sortingSettings
         );
+        //draw opaques first
         var filteringSettings = new FilteringSettings( //filters renderers out
-            RenderQueueRange.all
+            RenderQueueRange.opaque
         );
 
         context.DrawRenderers(
@@ -85,6 +86,16 @@ public class CameraRenderer
         );
 
         context.DrawSkybox(camera); // a skippable function
+
+        //draw transparents
+
+        sortingSettings.criteria = SortingCriteria.CommonTransparent;
+        drawingSettings.sortingSettings = sortingSettings;
+        filteringSettings.renderQueueRange = RenderQueueRange.transparent; //set for transparents
+
+        context.DrawRenderers(
+            cullingResults, ref drawingSettings, ref filteringSettings
+        );
     }
 
     bool Cull()
