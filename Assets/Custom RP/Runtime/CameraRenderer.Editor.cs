@@ -8,6 +8,7 @@ using UnityEngine.Rendering;
 partial class CameraRenderer
 {
     //declare empty stuff here and then full bodies in the #if section
+    partial void PrepareBuffer();
     partial void PrepareForSceneWindow();
     partial void DrawGizmos();
     partial void DrawUnsupportedShaders();
@@ -25,6 +26,10 @@ partial class CameraRenderer
         new ShaderTagId("VertexLM"),
 
     };
+
+    partial void PrepareBuffer(){
+        buffer.name = camera.name;
+    }
 
     partial void PrepareForSceneWindow(){
         //adds the UI to world geometry
