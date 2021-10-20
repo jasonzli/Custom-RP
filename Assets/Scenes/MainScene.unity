@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 578013147}
   - component: {fileID: 578013146}
   - component: {fileID: 578013145}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1059,7 +1059,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 51
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1097,7 +1097,7 @@ GameObject:
   - component: {fileID: 973299226}
   - component: {fileID: 973299225}
   - component: {fileID: 973299224}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1593,7 +1593,7 @@ GameObject:
   - component: {fileID: 1358522365}
   - component: {fileID: 1358522364}
   - component: {fileID: 1358522363}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1783,7 +1783,7 @@ GameObject:
   - component: {fileID: 1412923747}
   - component: {fileID: 1412923746}
   - component: {fileID: 1412923745}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sphere (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1971,7 +1971,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1700994769}
   - component: {fileID: 1700994768}
-  - component: {fileID: 1700994767}
   m_Layer: 0
   m_Name: Secondary Camera
   m_TagString: Untagged
@@ -1979,14 +1978,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1700994767
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700994766}
-  m_Enabled: 1
 --- !u!20 &1700994768
 Camera:
   m_ObjectHideFlags: 0
@@ -2018,7 +2009,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2037,13 +2028,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1700994766}
-  m_LocalRotation: {x: 0.038872458, y: 0.029153744, z: -0.01539225, w: 0.99870026}
-  m_LocalPosition: {x: 0, y: -0.5, z: -5.49}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 4.505, y: 3.28, z: -1.637}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1751472193
 GameObject:
   m_ObjectHideFlags: 0
@@ -2056,7 +2047,7 @@ GameObject:
   - component: {fileID: 1751472197}
   - component: {fileID: 1751472196}
   - component: {fileID: 1751472195}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
