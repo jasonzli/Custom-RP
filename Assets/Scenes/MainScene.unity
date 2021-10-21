@@ -1925,6 +1925,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1327816407}
+  - component: {fileID: 1327816408}
   m_Layer: 0
   m_Name: Scene
   m_TagString: Untagged
@@ -1964,6 +1965,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1327816408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327816406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53cb8fb812aa464f9cdec4cc2724a5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thing: {fileID: 8792544013304329616, guid: 997a29e957b6ae04caf722d2da65ba5c, type: 3}
+  materials:
+  - {fileID: 2100000, guid: 591725026990da942b2cf58790ade55b, type: 2}
+  - {fileID: 2100000, guid: 0f026289d5bc5a64c98bbf7ae5fa1a80, type: 2}
+  - {fileID: 2100000, guid: 145cc18db0f4c0942bdb02986d970e52, type: 2}
+  - {fileID: 2100000, guid: 5c17cdfb2d8260d4a8c7857d06fbfdb8, type: 2}
+  widthSpacing: 1
+  heightSpacing: 1
+  rows: 10
+  cols: 10
 --- !u!1 &1358522361
 GameObject:
   m_ObjectHideFlags: 0
