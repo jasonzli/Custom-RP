@@ -1,17 +1,24 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class CustomeRenderPipeline : RenderPipeline
+public class CustomRenderPipeline : RenderPipeline
 {
 
     //We abstract the camera rendering to its own class
     CameraRenderer renderer = new CameraRenderer();
 
+    //configurable pipeline
+    bool useDynamicBatching, useGPUInstancing;
+
     //Add a constructor to the render pipeline to set values
-    public CustomeRenderPipeline()
+    public CustomRenderPipeline(
+        bool useDynamicBatching, bool useGPUInstancing, bool useSRPBatcher
+    )
     {
+        this.useDynamicBatching = useDynamicBatching;
+        this.useGPUInstancing = useGPUInstancing;
         //Takes precedence over dynamic batching
-        GraphicsSettings.useScriptableRenderPipelineBatching = true;
+        GraphicsSettings.useScriptableRenderPipelineBatching = useSRPBatcher;
     }
 
     //RenderPipeline has a protected Render method that we override to make this pipeline work
@@ -23,7 +30,7 @@ public class CustomeRenderPipeline : RenderPipeline
         foreach (Camera camera in cameras)
         {//This lets us divert different cameras to do different things later.
          //THis is the scriptable renderer of the URP essentially
-            renderer.Render(context, camera);
+            renderer.Render(context, camera, useDynamicBatching, useGPUInstancing);
         }
     }
 
