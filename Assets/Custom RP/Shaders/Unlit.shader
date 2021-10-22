@@ -6,6 +6,7 @@ Shader "Custom RP/Unlit"
         _BaseColor ("Color", Color) = (1.0, 1.0, 1.0, 1.0)
         [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("Src Blend", Float) = 1 //self
         [Enum(UnityEngine.Rendering.BlendMode)] _DstBlend ("Dst Blend", FLoat) = 0 //target
+        [Enum(Off, 0, On, 1)] _ZWrite ("Z Write", Float) = 1
     }
     SubShader
     {
@@ -15,6 +16,7 @@ Shader "Custom RP/Unlit"
             //Selectable transparency blends!
             // src = SrcAlpha and dst OneMinusSrcAlpha is normal transparency
             Blend [_SrcBlend] [_DstBlend]
+            ZWrite [_Zwrite]
             
             HLSLPROGRAM
             
