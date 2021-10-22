@@ -43,12 +43,12 @@
         UNITY_SETUP_INSTANCE_ID(input)
         UNITY_TRANSFER_INSTANCE_ID(input, output);
         //float4's guidance: 0.0 for direction, 1.0 for point
-        float3 positionWS = TransformObjectToWorld(input.positionOS.xyz);
+        float3 positionWS = TransformObjectToWorld(input.positionOS);
         output.positionCS = TransformWorldToHClip(positionWS);
         float4 baseST = UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _BaseMap_ST);
         //apply scaling and translation in vertex step so the coords are scaled in fragment
         //xy is scale, zw is translation
-        output.baseUV = input.baseUV;// * baseST.xy + baseST.zw;
+        output.baseUV = input.baseUV * baseST.xy + baseST.zw;
         return output;
     }
     

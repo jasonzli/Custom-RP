@@ -24,7 +24,7 @@ Shader "Custom RP/Unlit"
             HLSLPROGRAM
             
             //adds clipping as a feature to turn off for the shader
-            #pragma shader_Feature _CLIPPING
+            #pragma shader_feature _CLIPPING
             //generates two versions of the shader: one for instancing and one without.
             #pragma multi_compile_instancing
             
