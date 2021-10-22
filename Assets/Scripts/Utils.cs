@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 
 public class Utils : MonoBehaviour
@@ -21,6 +22,11 @@ public class Utils : MonoBehaviour
     public FileTypes ending;
     public void Snapshot()
     {
-        ScreenCapture.CaptureScreenshot(filename + endingStrings[ending], scale);
+        if (!Directory.Exists("Screenshots/"))
+        {
+            Directory.CreateDirectory("Screenshots/");
+        }
+        ScreenCapture.CaptureScreenshot($"Screenshots/{filename}{endingStrings[ending]}", scale);
+        Debug.Log("Screenshot taken");
     }
 }

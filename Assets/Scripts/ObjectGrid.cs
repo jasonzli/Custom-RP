@@ -38,6 +38,10 @@ public class ObjectGrid : MonoBehaviour
                                        transform.position.z + zp * heightSpacing);
                 go.transform.position = pos;
                 go.GetComponent<MeshRenderer>().material = materials[Random.Range(0, materials.Length)];
+                if (Random.Range(0f, 1f) < .3f)
+                {
+                    go.AddComponent<PerObjectMaterialProperties>();
+                }
                 things.Add(go);
             }
         }
@@ -45,6 +49,8 @@ public class ObjectGrid : MonoBehaviour
 
     void EmptyGrid()
     {
+        if (things.Count == 0) return;
+
         foreach (GameObject go in things)
         {
 #if UNITY_EDITOR
