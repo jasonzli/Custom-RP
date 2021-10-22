@@ -26,7 +26,7 @@ public class MeshBall : MonoBehaviour
                 Random.insideUnitSphere * 10f, Quaternion.identity, Vector3.one
             );
             baseColors[i] =
-                new Vector4(Random.value, Random.value, Random.value, 1f);
+                new Vector4(Random.value, Random.value, Random.value, Random.value);
         }
     }
 
