@@ -3,6 +3,8 @@
     
     #include "../ShaderLibrary/Common.hlsl"
     
+    float4 _BaseColor;
+    
     float4 UnlitPassVertex(float3 positionOS: POSITION): SV_POSITION
     {
         //float4's guidance: 0.0 for direction, 1.0 for point
@@ -12,7 +14,7 @@
     
     float4 UnlitPassFragment(): SV_TARGET
     {
-        return float4(1.0, 1.0, 0.0, 1.0);
+        return _BaseColor;
     }
     
 #endif
