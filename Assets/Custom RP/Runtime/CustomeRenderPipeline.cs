@@ -7,6 +7,12 @@ public class CustomeRenderPipeline : RenderPipeline
     //We abstract the camera rendering to its own class
     CameraRenderer renderer = new CameraRenderer();
 
+    //Add a constructor to the render pipeline to set values
+    public CustomeRenderPipeline()
+    {
+        GraphicsSettings.useScriptableRenderPipelineBatching = true;
+    }
+
     //RenderPipeline has a protected Render method that we override to make this pipeline work
     //This is what is called in the custom pipline *asset*
     protected override void Render(
