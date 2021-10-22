@@ -39,6 +39,7 @@ public class MeshBall : MonoBehaviour
         }
         //mesh, submesh index, material, matrices, elements, and property block
         Graphics.DrawMeshInstanced(mesh, 0, material, matrices, 1023, block);
+        //The limit for DrawMeshInstanced is 1023
         //Note that your compute breaks this up into 511 instances a piece
     }
 }

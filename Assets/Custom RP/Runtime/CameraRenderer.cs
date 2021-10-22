@@ -91,7 +91,12 @@ public partial class CameraRenderer
 
         var drawingSettings = new DrawingSettings( //takes a shader and sorting setting to render
             unlitShaderTagId, sortingSettings
-        );
+        )
+        {
+            //dynamic batching settings
+            //enableDynamicBatching = true,
+            //enableInstancing = false
+        };
         //draw opaques first
         var filteringSettings = new FilteringSettings( //filters renderers out
             RenderQueueRange.opaque

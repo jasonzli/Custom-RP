@@ -10,6 +10,7 @@ public class CustomeRenderPipeline : RenderPipeline
     //Add a constructor to the render pipeline to set values
     public CustomeRenderPipeline()
     {
+        //Takes precedence over dynamic batching
         GraphicsSettings.useScriptableRenderPipelineBatching = true;
     }
 
