@@ -11,6 +11,9 @@ Shader "Custom RP/Unlit"
         {
             HLSLPROGRAM
             
+            //generates two versions of the shader: one for instancing and one without.
+            #pragma multi_compile_instancing
+            
             #pragma vertex UnlitPassVertex
             #pragma fragment UnlitPassFragment
             #include "UnlitPass.hlsl"

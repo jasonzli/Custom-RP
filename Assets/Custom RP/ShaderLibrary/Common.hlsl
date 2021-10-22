@@ -11,6 +11,9 @@
     #define UNITY_MATRIX_VP unity_MatrixVP
     #define UNITY_MATRIX_P glstate_matrix_projection
     
+    //For instancing... obviously
+    #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
+    
     //This package requires a UNITY_MATIRX_M macro
     #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/SpaceTransforms.hlsl"
     
