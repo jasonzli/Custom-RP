@@ -12,7 +12,7 @@
     
     float4 UnlitPassFragment(): SV_TARGET
     {
-        return 1.0;
+        return float4(1.0, 1.0, 0.0, 1.0);
     }
     
 #endif
