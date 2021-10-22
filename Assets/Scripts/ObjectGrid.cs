@@ -49,6 +49,8 @@ public class ObjectGrid : MonoBehaviour
 
     void EmptyGrid()
     {
+        if (things.Count == 0) return;
+
         foreach (GameObject go in things)
         {
 #if UNITY_EDITOR

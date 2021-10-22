@@ -5,6 +5,8 @@ Shader "Custom RP/Unlit"
         //No Semicolons here
         _BaseMap ("Texture", 2D) = "white" { }//"white" is the default unity white texture
         _BaseColor ("Color", Color) = (1.0, 1.0, 1.0, 1.0)
+        _Cutoff ("Alpha Cutoff", Range(0.0, 1.0)) = 0.5
+        [Toggle(_CLIPPING)] _Clipping ("Alpha Clipping", Float) = 0
         [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("Src Blend", Float) = 1 //self
         [Enum(UnityEngine.Rendering.BlendMode)] _DstBlend ("Dst Blend", FLoat) = 0 //target
         [Enum(Off, 0, On, 1)] _ZWrite ("Z Write", Float) = 1
