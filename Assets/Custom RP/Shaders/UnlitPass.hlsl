@@ -1,17 +1,14 @@
-Shader "Custom RP/Unlit"
-{
-    Properties { }
-    SubShader
+#ifndef CUSTOM_UNLIT_PASS_INCLUDED
+    #define CUSTOM_UNLIT_PASS_INCLUDED
+    
+    float4 UnlitPassVertex(): SV_POSITION
     {
-        Pass
-        {
-            HLSLPROGRAM
-            
-            #pragma vertex UnlitPassVertex
-            #pragma fragment UnlitPassFragment
-            #include "UnlitPass.hlsl"
-            ENDHLSL
-            
-        }
+        return 0.0;
     }
-}
+    
+    float4 UnlitPassFramgent(): SV_TARGET
+    {
+        return 0.0;
+    }
+    
+#endif
