@@ -3,6 +3,7 @@ Shader "Custom RP/Unlit"
     Properties
     {
         //No Semicolons here
+        _BaseMap ("Texture", 2D) = "white" { }//"white" is the default unity white texture
         _BaseColor ("Color", Color) = (1.0, 1.0, 1.0, 1.0)
         [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("Src Blend", Float) = 1 //self
         [Enum(UnityEngine.Rendering.BlendMode)] _DstBlend ("Dst Blend", FLoat) = 0 //target
@@ -16,7 +17,7 @@ Shader "Custom RP/Unlit"
             //Selectable transparency blends!
             // src = SrcAlpha and dst OneMinusSrcAlpha is normal transparency
             Blend [_SrcBlend] [_DstBlend]
-            ZWrite [_Zwrite]
+            ZWrite [_ZWrite]
             
             HLSLPROGRAM
             
