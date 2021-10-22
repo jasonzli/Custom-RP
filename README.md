@@ -2,7 +2,8 @@
 
 What's the benefit of having a scriptable render pipeline to a videogame designer? Let's find out as I go through Jasper's comprehensive guide on Unity's pipeline. 
 
-In here, I am following along with Catlike Coding's guide for the forward rendering scriptable pipeline. It is loaded up with my comments. Depending on how this goes, I'll write how it all went and what I think is beneficial about it.
+
+In here, I am following along with Catlike Coding's guide for the forward rendering scriptable pipeline. To the best of my ability, I've kept each commit dedicated to each subsection of the main tutorial, so better emphasize how the code changes. It is loaded up with my comments as a result. Depending on how this goes, I'll write how it all went and what I think is beneficial about it.
 
 
 ### Rationale
