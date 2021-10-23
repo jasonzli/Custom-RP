@@ -454,7 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.7270068, g: 0.5766329, b: 0.79508066, a: 1}
+  baseColor: {r: 0.86428833, g: 0.015810447, b: 0.08127081, a: 1}
   cutoff: 0.5
 --- !u!65 &67852007
 BoxCollider:
@@ -659,7 +659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.106191985, g: 0.15329088, b: 0.10283309, a: 1}
+  baseColor: {r: 0.8430979, g: 0.45409188, b: 0.39127004, a: 1}
   cutoff: 0.5
 --- !u!65 &98473821
 BoxCollider:
@@ -864,7 +864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.27379024, g: 0.33062688, b: 0.1690716, a: 1}
+  baseColor: {r: 0.07840112, g: 0.9523741, b: 0.57094276, a: 1}
   cutoff: 0.5
 --- !u!65 &179733112
 BoxCollider:
@@ -1069,7 +1069,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.12943353, g: 0.08393284, b: 0.12042569, a: 1}
+  baseColor: {r: 0.3913271, g: 0.7012719, b: 0.9658656, a: 1}
   cutoff: 0.5
 --- !u!65 &222719210
 BoxCollider:
@@ -1464,7 +1464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.021799305, g: 0.013074563, b: 0.040920023, a: 1}
+  baseColor: {r: 0.21764122, g: 0.5243462, b: 0.167023, a: 1}
   cutoff: 0.5
 --- !u!65 &493779748
 BoxCollider:
@@ -2049,7 +2049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.20671757, g: 0.3322474, b: 0.036837302, a: 1}
+  baseColor: {r: 0.479184, g: 0.52804387, b: 0.5494229, a: 1}
   cutoff: 0.5
 --- !u!65 &595042658
 BoxCollider:
@@ -2254,7 +2254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.39042646, g: 0.067859836, b: 0.12832692, a: 1}
+  baseColor: {r: 0.029529752, g: 0.19382313, b: 0.09671194, a: 1}
   cutoff: 0.5
 --- !u!65 &671381947
 BoxCollider:
@@ -3148,7 +3148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.071519025, g: 0.013732601, b: 0.05705911, a: 1}
+  baseColor: {r: 0.6035707, g: 0.62283593, b: 0.6051805, a: 1}
   cutoff: 0.5
 --- !u!65 &763043837
 BoxCollider:
@@ -3323,7 +3323,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &787835311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3588,7 +3588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.24837568, g: 0.109953724, b: 0.021122543, a: 1}
+  baseColor: {r: 0.7531284, g: 0.32056028, b: 0.025601009, a: 1}
   cutoff: 0.5
 --- !u!65 &820067833
 BoxCollider:
@@ -5512,7 +5512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.17131366, g: 0.13766448, b: 0.17327227, a: 1}
+  baseColor: {r: 0.28745458, g: 0.328298, b: 0.19612801, a: 1}
   cutoff: 0.5
 --- !u!65 &1040830168
 BoxCollider:
@@ -5717,7 +5717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.93614197, g: 0.75937873, b: 0.21878155, a: 1}
+  baseColor: {r: 0.45138142, g: 0.61011595, b: 0.11589275, a: 1}
   cutoff: 0.5
 --- !u!65 &1102888390
 BoxCollider:
@@ -6178,7 +6178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.64257604, g: 0.55080384, b: 0.4646132, a: 1}
+  baseColor: {r: 0.16805398, g: 0.515385, b: 0.20282447, a: 1}
   cutoff: 0.5
 --- !u!65 &1181153411
 BoxCollider:
@@ -6478,7 +6478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.09778832, g: 0.7028523, b: 0.004667077, a: 1}
+  baseColor: {r: 0.5401087, g: 0.86914146, b: 0.50949794, a: 1}
   cutoff: 0.5
 --- !u!65 &1229738452
 BoxCollider:
@@ -6588,7 +6588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.07947871, g: 0.07743111, b: 0.11718275, a: 1}
+  baseColor: {r: 0.58635783, g: 0.91157144, b: 0.9291736, a: 1}
   cutoff: 0.5
 --- !u!65 &1269058786
 BoxCollider:
@@ -6858,7 +6858,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1327816407
 Transform:
   m_ObjectHideFlags: 0
@@ -7015,7 +7015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.4596992, g: 0.4518467, b: 0.45649257, a: 1}
+  baseColor: {r: 0.7277207, g: 0.7855185, b: 0.23064895, a: 1}
   cutoff: 0.5
 --- !u!65 &1329889438
 BoxCollider:
@@ -7315,7 +7315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.10924303, g: 0.50776297, b: 0.5487489, a: 1}
+  baseColor: {r: 0.41415915, g: 0.84842324, b: 0.21753587, a: 1}
   cutoff: 0.5
 --- !u!65 &1377214494
 BoxCollider:
@@ -8172,7 +8172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.33927473, g: 0.87268186, b: 0.3844709, a: 1}
+  baseColor: {r: 0.0020749571, g: 0.0020328383, b: 0.0020296297, a: 1}
   cutoff: 0.5
 --- !u!65 &1614378507
 BoxCollider:
@@ -8282,7 +8282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.14270537, g: 0.1662993, b: 0.3665444, a: 1}
+  baseColor: {r: 0.3261247, g: 0.22942987, b: 0.040988393, a: 1}
   cutoff: 0.5
 --- !u!65 &1626890664
 BoxCollider:
@@ -9321,7 +9321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.39647827, g: 0.30677408, b: 0.4296884, a: 1}
+  baseColor: {r: 0.61635995, g: 0.635166, b: 0.57152164, a: 1}
   cutoff: 0.5
 --- !u!65 &1826687156
 BoxCollider:
@@ -9431,7 +9431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.81653726, g: 0.88494694, b: 0.9116473, a: 1}
+  baseColor: {r: 0.108563475, g: 0.4165246, b: 0.040939294, a: 1}
   cutoff: 0.5
 --- !u!65 &1827557096
 BoxCollider:
@@ -9770,7 +9770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.11021396, g: 0.58684665, b: 0.12174697, a: 1}
+  baseColor: {r: 0.4551235, g: 0.30829886, b: 0.95669234, a: 1}
   cutoff: 0.5
 --- !u!65 &1953418105
 BoxCollider:

@@ -9,7 +9,9 @@ using UnityEngine.Rendering;
 // each camera, allowing us to do different views, deferred, etc.
 public partial class CameraRenderer
 {
-    static ShaderTagId unlitShaderTagId = new ShaderTagId("SRPDefaultUnlit");
+    static ShaderTagId
+        unlitShaderTagId = new ShaderTagId("SRPDefaultUnlit"),
+        litShaderTagId = new ShaderTagId("CustomLit");
 
     ScriptableRenderContext context;
     Camera camera;
@@ -99,6 +101,9 @@ public partial class CameraRenderer
             enableDynamicBatching = useDynamicBatching,
             enableInstancing = useGPUInstancing
         };
+        //add a shader pass
+        drawingSettings.SetShaderPassName(1, litShaderTagId);
+
         //draw opaques first
         var filteringSettings = new FilteringSettings( //filters renderers out
             RenderQueueRange.opaque
