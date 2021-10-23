@@ -66,7 +66,9 @@
             clip(base.a - UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _Cutoff));
         #endif
         
-        base.rgb = input.normalWS;
+        //observe the error in length from interpolating vertex normals
+        //base.rgb = abs(length(input.normalWS) - 1.0) * 10.0;
+        base.rgb = normalize(input.normalWS);
         return base;
     }
     
