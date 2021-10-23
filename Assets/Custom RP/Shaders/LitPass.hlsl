@@ -2,6 +2,7 @@
     #define CUSTOM_LIT_PASS_INCLUDED
     
     #include "../ShaderLibrary/Common.hlsl"
+    #include "../ShaderLibrary/Surface.hlsl"
     
     //CBUFFER macro is replaced with the instancing buffer macro (which does both)
     /* formerly
@@ -68,8 +69,12 @@
         
         //observe the error in length from interpolating vertex normals
         //base.rgb = abs(length(input.normalWS) - 1.0) * 10.0;
-        base.rgb = normalize(input.normalWS);
-        return base;
+        
+        Surface surface;
+        surface.normal = normalize(input.normalWS);
+        surface.color = base.rgb;
+        surface.alpha = base.a;
+        return float4(surface.color, surface.alpha);
     }
     
 #endif
