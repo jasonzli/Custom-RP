@@ -3,7 +3,7 @@
     
     float3 IncomingLight(Surface surface, Light light)
     {
-        return saturate(dot(surface.normal, light.direction) + 0.5) * light.color;
+        return saturate(dot(surface.normal, light.direction)) * light.color;
     }
     
     float3 GetLighting(Surface surface, Light light)
