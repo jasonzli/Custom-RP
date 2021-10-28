@@ -3,6 +3,7 @@
     
     #include "../ShaderLibrary/Common.hlsl"
     #include "../ShaderLibrary/Surface.hlsl"
+    #include "../ShaderLibrary/Light.hlsl"
     #include "../ShaderLibrary/Lighting.hlsl"
     
     //CBUFFER macro is replaced with the instancing buffer macro (which does both)
