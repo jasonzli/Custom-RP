@@ -13,15 +13,25 @@ public class Lighting
         name = bufferName
     };
 
-    public void Setup(ScriptableRenderContext context)
+    CullingResults cullingResults;
+
+    public void Setup(
+        ScriptableRenderContext context, CullingResults cullingResults
+        )
     {
+        this.cullingResults = cullingResults;
         buffer.BeginSample(bufferName);
-        SetupDirectionalLight();
+        //SetupDirectionalLight();
+        SetupLights();//Use the culling results to set up lights instead of searching for it
         buffer.EndSample(bufferName);
         context.ExecuteCommandBuffer(buffer);
         buffer.Clear();
     }
 
+    void SetupLights()
+    {
+        NativeArray<VisibleLight> visibleLights = cullingResults.visibleLights;
+    }
     void SetupDirectionalLight()
     {
         Light light = RenderSettings.sun; //a Unity light, not the hlsl light struct
