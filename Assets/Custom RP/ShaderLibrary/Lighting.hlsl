@@ -13,8 +13,12 @@
     
     float3 GetLighting(Surface surface)
     {
-        //Invoke GetDirectionalLight() from the Light.hlsl file
-        return GetLighting(surface, GetDirectionalLight());
+        float3 color = 0.0;
+        for (int i = 0; i < GetDirectionalLightCount(); i++)
+        {
+            color += GetLighting(surface, GetDirectionalLight(i));
+        }
+        return color;
     }
     
     
