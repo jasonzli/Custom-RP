@@ -19,6 +19,7 @@ public class CustomRenderPipeline : RenderPipeline
         this.useGPUInstancing = useGPUInstancing;
         //Takes precedence over dynamic batching
         GraphicsSettings.useScriptableRenderPipelineBatching = useSRPBatcher;
+        GraphicsSettings.lightsUseLinearIntensity = true;
     }
 
     //RenderPipeline has a protected Render method that we override to make this pipeline work

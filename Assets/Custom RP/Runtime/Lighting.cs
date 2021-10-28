@@ -4,10 +4,16 @@ using UnityEngine.Rendering;
 //a public class Lighting with a command buffer
 public class Lighting
 {
+    const int maxDirLightCount = 4;
     const string bufferName = "Lighting";
     static int
-        dirLightColorId = Shader.PropertyToID("_DirectionalLightColor"),
-        dirLightDirectionID = Shader.PropertyToID("_DirectionalLightDirection");
+        dirLightCountId = Shader.PropertyToID("_DirectionalLightCount"),
+        dirLightColorsId = Shader.PropertyToID("_DirectionalLightColors"),
+        dirLightDirectionsId = Shader.PropertyToID("_DirectionalLightDirections");
+
+    static Vector4[]
+        dirLightColors = new Vector4[maxDirLightCount],
+        dirLightDirections = new Vector4[maxDirLightCount];
     CommandBuffer buffer = new CommandBuffer
     {
         name = bufferName
@@ -31,11 +37,27 @@ public class Lighting
     void SetupLights()
     {
         NativeArray<VisibleLight> visibleLights = cullingResults.visibleLights;
+        int dirLightCount = 0;
+        for (int i = 0; i < visibleLights.Length; i++)
+        {
+            VisibleLight visibleLight = visibleLights[i];
+            if (visibleLight.lightType == LightType.Directional)
+            {
+                SetupDirectionalLight(i, ref visibleLight);
+                if (dirLightCount >= maxDirLightCount)
+                {
+                    break; //If we have more than maxDirLightCount of lights, we can't use them
+                }
+            }
+
+        }
+        buffer.SetGlobalInt(dirLightCountId, visibleLights.Length);
+        buffer.SetGlobalVectorArray(dirLightColorsId, dirLightColors);
+        buffer.SetGlobalVectorArray(dirLightDirectionsId, dirLightDirections);
     }
-    void SetupDirectionalLight()
+    void SetupDirectionalLight(int index, ref VisibleLight visibleLight)
     {
-        Light light = RenderSettings.sun; //a Unity light, not the hlsl light struct
-        buffer.SetGlobalVector(dirLightColorId, light.color.linear * light.intensity);
-        buffer.SetGlobalVector(dirLightDirectionID, -light.transform.forward);
+        dirLightColors[index] = visibleLight.finalColor; //not in linear space, must be converted in pipeline with GraphicsSettings.lightsUseLinearIntensity
+        dirLightDirections[index] = -visibleLight.localToWorldMatrix.GetColumn(2); //the forward vector!
     }
 }
