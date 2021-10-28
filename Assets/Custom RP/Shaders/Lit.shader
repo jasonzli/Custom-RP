@@ -24,6 +24,7 @@ Shader "Custom RP/Lit"
             
             HLSLPROGRAM
             
+            #pragma target 3.5
             //adds clipping as a feature to turn off for the shader
             #pragma shader_feature _CLIPPING
             //generates two versions of the shader: one for instancing and one without.
