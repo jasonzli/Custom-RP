@@ -3,6 +3,7 @@
     
     #include "../ShaderLibrary/Common.hlsl"
     #include "../ShaderLibrary/Surface.hlsl"
+    #include "../ShaderLibrary/Lighting.hlsl"
     
     //CBUFFER macro is replaced with the instancing buffer macro (which does both)
     /* formerly
@@ -74,7 +75,8 @@
         surface.normal = normalize(input.normalWS);
         surface.color = base.rgb;
         surface.alpha = base.a;
-        return float4(surface.color, surface.alpha);
+        float3 color = GetLighting(surface);
+        return float4(color, surface.alpha);
     }
     
 #endif
