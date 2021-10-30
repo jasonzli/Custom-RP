@@ -7,6 +7,8 @@ Shader "Custom RP/Lit"
         _BaseColor ("Color", Color) = (.5, .5, .5, 1.0)
         _Cutoff ("Alpha Cutoff", Range(0.0, 1.0)) = 0.5
         [Toggle(_CLIPPING)] _Clipping ("Alpha Clipping", Float) = 0
+        _Metallic ("Metalilic", Range(0, 1)) = 0
+        _Smoothness ("Smoothness", Range(0, 1)) = .5
         [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("Src Blend", Float) = 1 //self
         [Enum(UnityEngine.Rendering.BlendMode)] _DstBlend ("Dst Blend", FLoat) = 0 //target
         [Enum(Off, 0, On, 1)] _ZWrite ("Z Write", Float) = 1
