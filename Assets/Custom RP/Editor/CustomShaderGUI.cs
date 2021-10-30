@@ -108,9 +108,16 @@ public class CustomShaderGUI : ShaderGUI
     // a bunch of keyword and property setting functions
     // as well as setters for the properties
     /// </summary>
-    void SetProperty(string name, float value)
+    bool SetProperty(string name, float value)
     {
-        FindProperty(name, properties).floatValue = value;
+        MaterialProperty property = FindProperty(name, properties, false); //false here tells Unity to not log an error if property not found, giving null
+        //We can use the null above the then decide to set a property or not
+        if (property != null)
+        {
+            property.floatValue = value;
+            return true;
+        }
+        return false;//property is null and not found.
     }
     void SetKeyword(string keyword, bool enabled)
     {
@@ -133,8 +140,11 @@ public class CustomShaderGUI : ShaderGUI
     //A combined SetProperty for when we have a shader_feature keyword we can use
     void SetProperty(string name, string keyword, bool value)
     {
-        SetProperty(name, value ? 1f : 0f);
-        SetKeyword(keyword, value);
+        //if property is found then set, otherwise ignore.
+        if (SetProperty(name, value ? 1f : 0f))
+        {
+            SetKeyword(keyword, value);
+        }
     }
 
     //A group of functions that set shader properties
