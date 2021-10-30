@@ -41,4 +41,6 @@ Shader "Custom RP/Lit"
             
         }
     }
+    
+    CustomEditor "CustomShaderGUI"
 }
