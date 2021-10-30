@@ -21,7 +21,10 @@
         BRDF brdf;
         float oneMinusReflectivity = OneMinusReflectivity(surface.metallic) //metallics reflect via specular
         brdf.diffuse = surface.color * oneMinusReflectivity;
-        brdf.specular = 0.0;
+        //surface.color - brdf.diffuse;
+        //reflected light cannot be more than the diffuse
+        //but metals take on surface color, so thje more metallic, the more *the specular* becomes the surface color
+        brdf.specular = lerp(MIN_REFLECTIVITY, surface.color, surface.metallic);
         brdf.roughness = 1.0;
         return brdf;
     }
