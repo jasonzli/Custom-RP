@@ -22,6 +22,7 @@
         
         float oneMinusReflectivity = OneMinusReflectivity(surface.metallic); //metallics reflect via specular
         brdf.diffuse = surface.color * oneMinusReflectivity;
+        brdf.diffuse *= surface.alpha; //premultiplied alpha, we do this so diffuse reflections still fade by alpha, but specular does not
         //surface.color - brdf.diffuse;
         //reflected light cannot be more than the diffuse
         //but metals take on surface color, so thje more metallic, the more *the specular* becomes the surface color
