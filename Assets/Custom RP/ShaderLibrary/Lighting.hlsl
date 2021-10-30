@@ -8,7 +8,7 @@
     
     float3 GetLighting(Surface surface, BRDF brdf, Light light)
     {
-        return IncomingLight(surface, light) * brdf.diffuse; //factor albedo into the lighting
+        return IncomingLight(surface, light) * DirectBRDF(surface, brdf, light);
     }
     
     float3 GetLighting(Surface surface, BRDF brdf)

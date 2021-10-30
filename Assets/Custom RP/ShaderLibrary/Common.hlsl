@@ -18,4 +18,9 @@
     //This package requires a UNITY_MATIRX_M macro
     #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/SpaceTransforms.hlsl"
     
+    //some easy functions
+    float Square(float v)
+    {
+        return v * v;
+    }
 #endif
