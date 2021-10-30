@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Unlit Instances
+  m_Name: Lit Instanced
   m_Shader: {fileID: 4800000, guid: 8e8a78f887fecf14bb4c2cae67769e2c, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -61,7 +61,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
-    - _Clipping: 0
     - _Cutoff: 0.245
     - _DetailNormalMapScale: 1
     - _DstBlend: 10

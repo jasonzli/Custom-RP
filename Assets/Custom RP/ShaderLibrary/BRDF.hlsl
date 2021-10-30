@@ -33,6 +33,12 @@
         return brdf;
     }
     
+    /////////////
+    //
+    // BRDF Calculation
+    //
+    ////////////////
+    
     //minimalist CookTorrance BRDF
     float SpecularStrength(Surface surface, BRDF brdf, Light light)
     {
