@@ -13,6 +13,8 @@ public class CustomShaderGUI : ShaderGUI
     Object[] materials; //because materialEditor.targets is Object[] so we match it here
     MaterialProperty[] properties;
 
+    bool showPresets;
+
     public override void OnGUI(
         MaterialEditor materialEditor, MaterialProperty[] porperties
     )
@@ -21,8 +23,91 @@ public class CustomShaderGUI : ShaderGUI
         editor = materialEditor;
         materials = materialEditor.targets;
         this.properties = properties;
+
+        EditorGUILayout.Space();
+        showPresets = EditorGUILayout.Foldout(showPresets, "Presets", true);
+        if (showPresets)
+        {
+            //Draw the custom GUI preset buttons
+            OpaquePreset();
+            ClipPreset();
+            FadePreset();
+            TransparentPreset();
+        }
+    }
+    /// <summary>
+    // this set of functions describes the material presets for the buttons
+    /// </summary>
+
+    //Creating a preset button that both does the undo handling with the editor
+    //and also creates the btuton through GUILayout.Button
+    bool PresetButton(string name)
+    {
+        if (GUILayout.Button(name))
+        {
+            editor.RegisterPropertyChangeUndo(name);
+            return true;
+        }
+        return false;
     }
 
+    //separate method per preset
+    void OpaquePreset()
+    {
+        if (PresetButton("Opaque"))
+        {
+            Clipping = false;
+            PremultiplyAlpha = false;
+            SrcBlend = BlendMode.One;
+            DstBlend = BlendMode.Zero;
+            ZWrite = true;
+            RenderQueue = RenderQueue.Geometry;
+        }
+    }
+
+    void ClipPreset()
+    {
+        if (PresetButton("Clip"))
+        {
+            Clipping = true;
+            PremultiplyAlpha = false;
+            SrcBlend = BlendMode.One;
+            DstBlend = BlendMode.Zero;
+            ZWrite = true;
+            RenderQueue = RenderQueue.AlphaTest;
+        }
+    }
+
+    void FadePreset()
+    {
+        if (PresetButton("Fade"))
+        {
+            Clipping = false;
+            PremultiplyAlpha = false;
+            SrcBlend = BlendMode.SrcAlpha;
+            DstBlend = BlendMode.OneMinusSrcAlpha;
+            ZWrite = false;
+            RenderQueue = RenderQueue.Transparent;
+        }
+    }
+
+    void TransparentPreset()
+    {
+        if (PresetButton("Transparent"))
+        {
+            Clipping = false;
+            PremultiplyAlpha = true;
+            SrcBlend = BlendMode.One;
+            DstBlend = BlendMode.OneMinusSrcAlpha;
+            ZWrite = false;
+            RenderQueue = RenderQueue.Transparent;
+        }
+    }
+
+    /// <summary>
+    // a bunch of keyword and property setting functions
+    // as well as setters for the properties
+    /// </summary>
     void SetProperty(string name, float value)
     {
         FindProperty(name, properties).floatValue = value;
