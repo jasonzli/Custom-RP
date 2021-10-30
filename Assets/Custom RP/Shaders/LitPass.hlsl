@@ -53,8 +53,8 @@
         UNITY_SETUP_INSTANCE_ID(input)
         UNITY_TRANSFER_INSTANCE_ID(input, output);
         //float4's guidance: 0.0 for direction, 1.0 for point
-        float3 positionWS = TransformObjectToWorld(input.positionOS);
-        output.positionCS = TransformWorldToHClip(positionWS);
+        output.positionWS = TransformObjectToWorld(input.positionOS);
+        output.positionCS = TransformWorldToHClip(output.positionWS);
         output.normalWS = TransformObjectToWorldNormal(input.normalOS);
         float4 baseST = UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _BaseMap_ST);
         //apply scaling and translation in vertex step so the coords are scaled in fragment
@@ -79,6 +79,7 @@
         
         Surface surface;
         surface.normal = normalize(input.normalWS);
+        surface.viewDirection = normalize(_WorldSpaceCameraPos - input.positionWS);
         surface.color = base.rgb;
         surface.alpha = base.a;
         surface.metallic = UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _Metallic);
