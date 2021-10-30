@@ -20,14 +20,16 @@
     {
         BRDF brdf;
         
-        float oneMinusReflectivity = OneMinusReflectivity(surface.metallic) //metallics reflect via specular
+        float oneMinusReflectivity = OneMinusReflectivity(surface.metallic); //metallics reflect via specular
         brdf.diffuse = surface.color * oneMinusReflectivity;
         //surface.color - brdf.diffuse;
         //reflected light cannot be more than the diffuse
         //but metals take on surface color, so thje more metallic, the more *the specular* becomes the surface color
         brdf.specular = lerp(MIN_REFLECTIVITY, surface.color, surface.metallic);
-        float perceptualRoughness = PercetualSmoothnessToPerceptualRoughness(surface.smoothness);
-        brdf.roughness = PerceptualRoughnessToRoughenss(perceptualRoughness);
+        
+        float perceptualRoughness = PerceptualSmoothnessToPerceptualRoughness(surface.smoothness);
+        brdf.roughness = PerceptualRoughnessToRoughness(perceptualRoughness);
+        
         return brdf;
     }
 #endif

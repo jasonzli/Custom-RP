@@ -40,6 +40,7 @@
     struct Varyings //instancing requires a struct as a vertex parameter
     {
         float4 positionCS: SV_POSITION;
+        float3 positionWS: VAR_POSITION;
         float3 normalWS: VAR_NORMAL;
         float2 baseUV: VAR_BASE_UV; //this is our own semantic
         UNITY_VERTEX_INPUT_INSTANCE_ID
