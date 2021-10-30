@@ -4,6 +4,8 @@
     #include "../ShaderLibrary/Common.hlsl"
     #include "../ShaderLibrary/Surface.hlsl"
     #include "../ShaderLibrary/Light.hlsl"
+    #include "../ShaderLibrary/BRDF.hlsl"
+    //BRDF is used in Lighting
     #include "../ShaderLibrary/Lighting.hlsl"
     
     //CBUFFER macro is replaced with the instancing buffer macro (which does both)
@@ -80,7 +82,8 @@
         surface.alpha = base.a;
         surface.metallic = UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _Metallic);
         surface.smoothness = UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _Smoothness);
-        float3 color = GetLighting(surface);
+        BRDF brdf = GetBRDF(surface);
+        float3 color = GetLighting(surface, brdf);
         return float4(color, surface.alpha);
     }
     
