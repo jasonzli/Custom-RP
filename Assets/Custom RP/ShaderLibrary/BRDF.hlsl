@@ -8,10 +8,18 @@
         float roughness;
     };
     
+    #define MIN_REFLECTIVITY 0.04
+    
+    float OneMinusReflectivity(float metallic)
+    {
+        float range = 1.0 - MIN_REFLECTIVITY;
+        return range - metallic * range;
+    }
+    
     BRDF GetBRDF(Surface surface)
     {
         BRDF brdf;
-        float oneMinusReflectivity = 1.0 - surface.metallic; //metallics reflect via specular
+        float oneMinusReflectivity = OneMinusReflectivity(surface.metallic) //metallics reflect via specular
         brdf.diffuse = surface.color * oneMinusReflectivity;
         brdf.specular = 0.0;
         brdf.roughness = 1.0;
