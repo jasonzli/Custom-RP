@@ -2,6 +2,7 @@
     #define CUSTOM_COMMON_INCLUDED
     
     #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
+    #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/CommonMaterial.hlsl"
     #include "UnityInput.hlsl"
     
     //this is how unity expects these matrices to be defined
@@ -17,4 +18,9 @@
     //This package requires a UNITY_MATIRX_M macro
     #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/SpaceTransforms.hlsl"
     
+    //some easy functions
+    float Square(float v)
+    {
+        return v * v;
+    }
 #endif
