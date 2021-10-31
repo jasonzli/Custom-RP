@@ -99,7 +99,32 @@ public class Shadows
             RenderBufferStoreAction.Store //we store data
         );
         buffer.ClearRenderTarget(true, false, Color.clear);//clear the target
+        buffer.BeginSample(bufferName);
         ExecuteBuffer();
+
+        for (int i = 0; i < ShadowedDirectionalLightCount; i++)
+        {
+            RenderDirectionalShadows(i, atlasSize);
+        }
+
+        buffer.EndSample(bufferName);
+        ExecuteBuffer();
+    }
+
+    void RenderDirectionalShadows(int index, int tileSize)
+    {
+        ShadowedDirectionalLight light = ShadowedDirectionalLights[index];
+        var shadowSettings =
+            new ShadowDrawingSettings(cullingResults, light.visibleLightIndex);
+        cullingResults.ComputeDirectionalShadowsMatricesAndCullingPrimitives(
+            light.visibleLightIndex, 0, 1, Vector3.zero, tileSize, 0f,
+            out Matrix4x4 viewMatrix, out Matrix4x4 projectionMatrix,
+            out ShadowSplitData splitData
+        );
+        shadowSettings.splitData = splitData; //splitData contains cull information about shadow casters
+        buffer.SetViewProjectionMatrices(viewMatrix, projectionMatrix);//I think these are just available?
+        ExecuteBuffer();
+        context.DrawShadows(shadowSettings); // actually tell the context to draw
     }
 
     void ExecuteBuffer()
