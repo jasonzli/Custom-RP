@@ -102,7 +102,7 @@ public class Shadows
         int atlasSize = (int)settings.directional.atlasSize;
         buffer.GetTemporaryRT(dirShadowAtlasId, atlasSize, atlasSize,
         //bits, filtering, type
-        32, FilterMode.Bilinear, RenderTextureFormat.Shadowmap);
+        32, FilterMode.Bilinear, RenderTextureFormat.Depth);
         //16 is used for the unity RP, we'll use 32 for ours
         //we have to tell the cmera to render to the shadow atlas instead of the camera target
         buffer.SetRenderTarget(

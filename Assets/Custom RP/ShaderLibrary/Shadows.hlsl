@@ -27,7 +27,7 @@
     
     //The attentuation is a factor of how much light is being received by the surface.
     //This modifies the light
-    float GetDirectionalShadowAttenutation(DirectionalShadowData data, Surface surfaceWS)
+    float GetDirectionalShadowAttenuation(DirectionalShadowData data, Surface surfaceWS)
     {
         if (data.strength <= 0.0)
         {
