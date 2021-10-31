@@ -64,5 +64,6 @@ public class Lighting
     {
         dirLightColors[index] = visibleLight.finalColor; //not in linear space, must be converted in pipeline with GraphicsSettings.lightsUseLinearIntensity
         dirLightDirections[index] = -visibleLight.localToWorldMatrix.GetColumn(2); //the forward vector!
+        shadows.ReserveDirectionalShadows(visibleLight.light, index);
     }
 }
