@@ -22,6 +22,7 @@ public class Lighting
 
     CullingResults cullingResults;
 
+    Shadows shadows = new Shadows();
     public void Setup(
         ScriptableRenderContext context, CullingResults cullingResults,
         ShadowSettings shadowSettings
@@ -29,7 +30,7 @@ public class Lighting
     {
         this.cullingResults = cullingResults;
         buffer.BeginSample(bufferName);
-        //SetupDirectionalLight();
+        shadows.Setup(context, cullingResults, shadowSettings);
         SetupLights();//Use the culling results to set up lights instead of searching for it
         buffer.EndSample(bufferName);
         context.ExecuteCommandBuffer(buffer);
@@ -57,6 +58,8 @@ public class Lighting
         buffer.SetGlobalVectorArray(dirLightColorsId, dirLightColors);
         buffer.SetGlobalVectorArray(dirLightDirectionsId, dirLightDirections);
     }
+
+    //This function sets the array of directional lights that we pass to the CBUFFER on the GPU
     void SetupDirectionalLight(int index, ref VisibleLight visibleLight)
     {
         dirLightColors[index] = visibleLight.finalColor; //not in linear space, must be converted in pipeline with GraphicsSettings.lightsUseLinearIntensity
