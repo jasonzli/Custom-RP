@@ -11,7 +11,7 @@ public class Shadows
 {
     static int dirShadowAtlasId = Shader.PropertyToID("_DirectionalShadowAtlas");
     const int maxShadowedDirectionalLightCount = 1;//uhhhh i didn't know you had to limit this
-    int ShadowedDirectionalLightCount;
+    int shadowedDirectionalLightCount;
     const string bufferName = "Shadows";
     CommandBuffer buffer = new CommandBuffer
     {
@@ -27,7 +27,7 @@ public class Shadows
         public int visibleLightIndex;
     }
 
-    ShadowedDirectionalLight[] ShadowedDirectionalLights =
+    ShadowedDirectionalLight[] shadowedDirectionalLights =
         new ShadowedDirectionalLight[maxShadowedDirectionalLightCount];
 
     public void Setup(
@@ -38,19 +38,19 @@ public class Shadows
         this.context = context;
         this.cullingResults = cullingResults;
         this.settings = settings;
-        ShadowedDirectionalLightCount = 0;
+        shadowedDirectionalLightCount = 0;
     }
     //Reserve space for the shadow atlas for hte light's shadow map
     public void ReserveDirectionalShadows(Light light, int visibleLightIndex)
     {
         //add light if there's space in our count
-        if (ShadowedDirectionalLightCount < maxShadowedDirectionalLightCount &&
+        if (shadowedDirectionalLightCount < maxShadowedDirectionalLightCount &&
             //actually casting shadows check
             light.shadows != LightShadows.None && light.shadowStrength > 0f &&
             //check if the light is in the bounds of the cull, returns if the bounds are valid
             cullingResults.GetShadowCasterBounds(visibleLightIndex, out Bounds b))
         {
-            ShadowedDirectionalLights[ShadowedDirectionalLightCount++] =
+            shadowedDirectionalLights[shadowedDirectionalLightCount++] =
                 new ShadowedDirectionalLight
                 {
                     visibleLightIndex = visibleLightIndex //index of the shadowable directional light
@@ -61,7 +61,7 @@ public class Shadows
     //skip if no shadowed lights
     public void Render()
     {
-        if (ShadowedDirectionalLightCount > 0)
+        if (shadowedDirectionalLightCount > 0)
         {
             RenderDirectionalShadows();
         }
@@ -102,7 +102,7 @@ public class Shadows
         buffer.BeginSample(bufferName);
         ExecuteBuffer();
 
-        for (int i = 0; i < ShadowedDirectionalLightCount; i++)
+        for (int i = 0; i < shadowedDirectionalLightCount; i++)
         {
             RenderDirectionalShadows(i, atlasSize);
         }
@@ -113,10 +113,10 @@ public class Shadows
 
     void RenderDirectionalShadows(int index, int tileSize)
     {
-        ShadowedDirectionalLight light = ShadowedDirectionalLights[index];
+        ShadowedDirectionalLight light = shadowedDirectionalLights[index];
         var shadowSettings =
             new ShadowDrawingSettings(cullingResults, light.visibleLightIndex);
-        cullingResults.ComputeDirectionalShadowsMatricesAndCullingPrimitives(
+        cullingResults.ComputeDirectionalShadowMatricesAndCullingPrimitives(
             light.visibleLightIndex, 0, 1, Vector3.zero, tileSize, 0f,
             out Matrix4x4 viewMatrix, out Matrix4x4 projectionMatrix,
             out ShadowSplitData splitData
@@ -124,7 +124,8 @@ public class Shadows
         shadowSettings.splitData = splitData; //splitData contains cull information about shadow casters
         buffer.SetViewProjectionMatrices(viewMatrix, projectionMatrix);//I think these are just available?
         ExecuteBuffer();
-        context.DrawShadows(shadowSettings); // actually tell the context to draw
+        //Only draws for materialas that have a lightMode tag for "ShadowCaster" pases
+        context.DrawShadows(ref shadowSettings); // actually tell the context to draw
     }
 
     void ExecuteBuffer()

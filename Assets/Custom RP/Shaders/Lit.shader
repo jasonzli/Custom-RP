@@ -16,9 +16,10 @@ Shader "Custom RP/Lit"
     }
     SubShader
     {
-        Tags { "LightMode" = "CustomLit" }
+        
         Pass
         {
+            Tags { "LightMode" = "CustomLit" }
             //note how this preceeds the HLSLPROGRAM block
             //Selectable transparency blends!
             // src = SrcAlpha and dst OneMinusSrcAlpha is normal transparency
@@ -37,6 +38,24 @@ Shader "Custom RP/Lit"
             #pragma vertex LitPassVertex
             #pragma fragment LitPassFragment
             #include "LitPass.hlsl"
+            ENDHLSL
+            
+        }
+        
+        Pass
+        {
+            Tags { "LightMode" = "ShadowCaster" }
+            
+            ColorMask 0
+            
+            HLSLPROGRAM
+            
+            #pragma target 3.5
+            #pragma shader_feature _CLIPPING
+            #pragma multi_compile_instancing
+            #pragma vertex ShadowCasterPassVertex
+            #pragma fragment ShadowCasterPassFragment
+            #include "ShadowCasterPass.hlsl"
             ENDHLSL
             
         }

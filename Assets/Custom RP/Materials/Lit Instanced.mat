@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Lit Instanced
-  m_Shader: {fileID: 4800000, guid: 8e8a78f887fecf14bb4c2cae67769e2c, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: c74c47a78237d5246bf303ae437c7722, type: 3}
+  m_ShaderKeywords: _CLIPPING _PREMULTIPLY_ALPHA
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -61,6 +61,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
+    - _Clipping: 1
     - _Cutoff: 0.245
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
@@ -71,9 +72,11 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _PremulAlpha: 1
+    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 5
+    - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
