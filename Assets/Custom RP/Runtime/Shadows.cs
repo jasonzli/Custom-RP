@@ -102,7 +102,7 @@ public class Shadows
         int atlasSize = (int)settings.directional.atlasSize;
         buffer.GetTemporaryRT(dirShadowAtlasId, atlasSize, atlasSize,
         //bits, filtering, type
-        32, FilterMode.Bilinear, RenderTextureFormat.Depth);
+        32, FilterMode.Bilinear, RenderTextureFormat.Shadowmap);
         //16 is used for the unity RP, we'll use 32 for ours
         //we have to tell the cmera to render to the shadow atlas instead of the camera target
         buffer.SetRenderTarget(
@@ -172,12 +172,12 @@ public class Shadows
         float scale = 1f / split;
         m.m00 = (0.5f * (m.m00 + m.m30) + offset.x * m.m30) * scale;
         m.m01 = (0.5f * (m.m01 + m.m31) + offset.x * m.m31) * scale;
-        m.m02 = (0.5f * (m.m02 + m.m32) + offset.x * m.m31) * scale;
-        m.m03 = (0.5f * (m.m03 + m.m33) + offset.x * m.m31) * scale;
-        m.m10 = (0.5f * (m.m10 + m.m30) + offset.y * m.m31) * scale;
+        m.m02 = (0.5f * (m.m02 + m.m32) + offset.x * m.m32) * scale;
+        m.m03 = (0.5f * (m.m03 + m.m33) + offset.x * m.m33) * scale;
+        m.m10 = (0.5f * (m.m10 + m.m30) + offset.y * m.m30) * scale;
         m.m11 = (0.5f * (m.m11 + m.m31) + offset.y * m.m31) * scale;
-        m.m12 = (0.5f * (m.m12 + m.m32) + offset.y * m.m31) * scale;
-        m.m13 = (0.5f * (m.m13 + m.m33) + offset.y * m.m31) * scale;
+        m.m12 = (0.5f * (m.m12 + m.m32) + offset.y * m.m32) * scale;
+        m.m13 = (0.5f * (m.m13 + m.m33) + offset.y * m.m33) * scale;
         m.m20 = 0.5f * (m.m20 + m.m30);
         m.m21 = 0.5f * (m.m21 + m.m31);
         m.m22 = 0.5f * (m.m22 + m.m32);
@@ -192,8 +192,7 @@ public class Shadows
         buffer.SetViewport(new Rect
         (
             offset.x * tileSize, offset.y * tileSize, tileSize, tileSize
-            )
-            );
+        ));
         return offset;
     }
 
