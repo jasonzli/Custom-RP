@@ -48,6 +48,9 @@ public partial class CameraRenderer
         DrawUnsupportedShaders();
         DrawGizmos();
 
+        //cleanup the memory usage
+        lighting.Cleanup();
+
         //You need a submit on the context to draw anything
         Submit();
     }

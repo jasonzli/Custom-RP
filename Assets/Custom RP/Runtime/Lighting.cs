@@ -32,6 +32,7 @@ public class Lighting
         buffer.BeginSample(bufferName);
         shadows.Setup(context, cullingResults, shadowSettings);
         SetupLights();//Use the culling results to set up lights instead of searching for it
+        shadows.Render(); //After the lights are setup, render the shadow atlas, remember that objects will be lit in their own fragment step
         buffer.EndSample(bufferName);
         context.ExecuteCommandBuffer(buffer);
         buffer.Clear();
@@ -65,5 +66,11 @@ public class Lighting
         dirLightColors[index] = visibleLight.finalColor; //not in linear space, must be converted in pipeline with GraphicsSettings.lightsUseLinearIntensity
         dirLightDirections[index] = -visibleLight.localToWorldMatrix.GetColumn(2); //the forward vector!
         shadows.ReserveDirectionalShadows(visibleLight.light, index);
+    }
+
+    //cleanup is called by camera, which is the thing calling the render
+    public void Cleanup()
+    {
+        shadows.Cleanup();
     }
 }
