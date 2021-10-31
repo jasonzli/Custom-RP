@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028414, g: 0.22571492, b: 0.30692342, a: 1}
+  m_IndirectSpecularColor: {r: 0.1802838, g: 0.22571465, b: 0.30692267, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -454,7 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.08772613, g: 0.35726777, b: 0.2997363, a: 1}
+  baseColor: {r: 0.54441065, g: 0.74419564, b: 0.47360075, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -851,7 +851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.63854504, g: 0.9021516, b: 0.8890271, a: 1}
+  baseColor: {r: 0.08838437, g: 0.01617191, b: 0.51645106, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -1248,7 +1248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.11340939, g: 0.11190016, b: 0.121711865, a: 1}
+  baseColor: {r: 0.6308152, g: 0.30188566, b: 0.40911174, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -1740,7 +1740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.41791418, g: 0.19907248, b: 0.62580925, a: 1}
+  baseColor: {r: 0.13057095, g: 0.17839469, b: 0.015810072, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -1835,13 +1835,13 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 3
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1892,13 +1892,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289715527}
-  m_LocalRotation: {x: 0.22106485, y: 0.77242875, z: -0.36018896, w: 0.47407606}
+  m_LocalRotation: {x: 0.055437487, y: 0.8984765, z: -0.41896614, w: 0.118886456}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: 116.921, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 884.925, z: 0}
 --- !u!1 &311840187
 GameObject:
   m_ObjectHideFlags: 0
@@ -2135,7 +2135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.15960373, g: 0.05721429, b: 0.030436706, a: 1}
+  baseColor: {r: 0.06907016, g: 0.19614163, b: 0.17615716, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -2533,7 +2533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.31192508, g: 0.15101776, b: 0.11618599, a: 1}
+  baseColor: {r: 0.62764764, g: 0.7563832, b: 0.7224495, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -2930,7 +2930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.42892176, g: 0.2688927, b: 0.009984593, a: 1}
+  baseColor: {r: 0.656436, g: 0.22073038, b: 0.2727071, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -3042,7 +3042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.8766829, g: 0.26764965, b: 0.8293737, a: 1}
+  baseColor: {r: 0.4112404, g: 0.4429932, b: 0.4662946, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -3534,7 +3534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.5735091, g: 0.6192617, b: 0.5961576, a: 1}
+  baseColor: {r: 0.74526674, g: 0.6275244, b: 0.5949519, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -3836,7 +3836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.6106475, g: 0.9363972, b: 0.297123, a: 1}
+  baseColor: {r: 0.38887957, g: 0.18136892, b: 0.48494917, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -4043,7 +4043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.89043987, g: 0.8754039, b: 0.6663941, a: 1}
+  baseColor: {r: 0.87119293, g: 0.29139277, b: 0.5359619, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -4250,7 +4250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.9751229, g: 0.37647578, b: 0.41603842, a: 1}
+  baseColor: {r: 0.17261375, g: 0.14450751, b: 0.094383195, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -4362,7 +4362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.22368976, g: 0.5106954, b: 0.38150474, a: 1}
+  baseColor: {r: 0.06830494, g: 0.92882884, b: 0.56951123, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -4634,7 +4634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &866057021
 Light:
   m_ObjectHideFlags: 0
@@ -4757,7 +4757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.102020755, g: 0.08913136, b: 0.09537154, a: 1}
+  baseColor: {r: 0.22608532, g: 0.21890363, b: 0.22826639, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -4906,6 +4906,118 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 33.983, y: 3.233, z: -0.192}
+--- !u!1 &889966603
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 889966604}
+  - component: {fileID: 889966608}
+  - component: {fileID: 889966607}
+  - component: {fileID: 889966606}
+  - component: {fileID: 889966605}
+  m_Layer: 0
+  m_Name: Cube prefab(Clone) (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &889966604
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889966603}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.67, y: 3.88, z: -0.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1947947079}
+  m_RootOrder: 100
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &889966605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889966603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseColor: {r: 0.036908034, g: 0.0048678047, b: 0.002546373, a: 1}
+  cutoff: 0.5
+  metallic: 0
+  smoothness: 0.5
+--- !u!65 &889966606
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889966603}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &889966607
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889966603}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 1c832c20cf4f16044ab1ee1508457291, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &889966608
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889966603}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &918151760
 GameObject:
   m_ObjectHideFlags: 0
@@ -5028,8 +5140,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 920752022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.5162086, y: 5.8331504, z: -1.0940728}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -6.3, y: 6.42, z: 3.36}
+  m_LocalScale: {x: 4.3509, y: 4.3509, z: 4.3509}
   m_Children: []
   m_Father: {fileID: 1947947079}
   m_RootOrder: 61
@@ -5112,7 +5224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &970383736
 Light:
   m_ObjectHideFlags: 0
@@ -5615,7 +5727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.014975311, g: 0.012179864, b: 0.01212817, a: 1}
+  baseColor: {r: 0.6104124, g: 0.66586506, b: 0.67718977, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -6012,7 +6124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.6083346, g: 0.60071015, b: 0.668752, a: 1}
+  baseColor: {r: 0.12473346, g: 0.11081946, b: 0.11779648, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -6219,7 +6331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.5501382, g: 0.6489068, b: 0.697599, a: 1}
+  baseColor: {r: 0.4608508, g: 0.47367722, b: 0.12673593, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -6996,7 +7108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.4047851, g: 0.20066646, b: 0.154153, a: 1}
+  baseColor: {r: 0.4457745, g: 0.37612045, b: 0.31609973, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -7963,7 +8075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.3850997, g: 0.34760725, b: 0.31228712, a: 1}
+  baseColor: {r: 0.0049500195, g: 0.0050695436, b: 0.0053012376, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -8140,7 +8252,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1740462900
 Light:
   m_ObjectHideFlags: 0
@@ -8548,7 +8660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.5087599, g: 0.22569366, b: 0.37161434, a: 1}
+  baseColor: {r: 0.37504968, g: 0.3509603, b: 0.8295145, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -8660,7 +8772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.28113765, g: 0.49536413, b: 0.42153022, a: 1}
+  baseColor: {r: 0.24519567, g: 0.816905, b: 0.60165584, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -8867,7 +8979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.21556915, g: 0.7042087, b: 0.24400733, a: 1}
+  baseColor: {r: 0.36948788, g: 0.096881025, b: 0.5756704, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -9462,6 +9574,7 @@ Transform:
   - {fileID: 1861287600}
   - {fileID: 280327863}
   - {fileID: 1202715213}
+  - {fileID: 889966604}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -73.47, y: 50.349, z: -113.236}
@@ -9986,7 +10099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.7152254, g: 0.79986614, b: 0.8778311, a: 1}
+  baseColor: {r: 0.62548476, g: 0.4417708, b: 0.5525208, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -10383,7 +10496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.3973555, g: 0.44592568, b: 0.5716323, a: 1}
+  baseColor: {r: 0.07356933, g: 0.24098805, b: 0.2024423, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
