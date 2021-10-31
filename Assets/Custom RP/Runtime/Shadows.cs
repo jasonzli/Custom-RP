@@ -9,9 +9,15 @@ using UnityEngine.Rendering;
 /// </summary>
 public class Shadows
 {
-    static int dirShadowAtlasId = Shader.PropertyToID("_DirectionalShadowAtlas");
     const int maxShadowedDirectionalLightCount = 4;//uhhhh i didn't know you had to limit this
-    int shadowedDirectionalLightCount;
+
+    static int
+        dirShadowAtlasId = Shader.PropertyToID("_DirectionalShadowAtlas"),
+        dirShadowMatricesId = Shader.PropertyToID("_DirectionalShadowMatrices");
+
+    //transformation matrices for converting fragment positions to shadowmap UVs
+    static Matrix4x4[]
+        dirShadowMatrices = new Matrix4x4[maxShadowedDirectionalLightCount]; int shadowedDirectionalLightCount;
     const string bufferName = "Shadows";
     CommandBuffer buffer = new CommandBuffer
     {
@@ -111,6 +117,8 @@ public class Shadows
             RenderDirectionalShadows(i, split, tileSize);
         }
 
+        buffer.SetGlobalMatrixArray(dirShadowMatricesId, dirShadowMatrices);
+
         buffer.EndSample(bufferName);
         ExecuteBuffer();
     }
@@ -126,21 +134,62 @@ public class Shadows
             out ShadowSplitData splitData
         );
         shadowSettings.splitData = splitData; //splitData contains cull information about shadow casters
+        //set the texture coords per light (this is the annoying thing we get to defer in deferred renders)
         SetTileViewport(index, split, tileSize);
-        buffer.SetViewProjectionMatrices(viewMatrix, projectionMatrix);//I think these are just available?
-        ExecuteBuffer();
+        //add this light's conversion matrix to the array
+        dirShadowMatrices[index] = ConvertToAtlasMatrix(
+            projectionMatrix * viewMatrix,
+            SetTileViewport(index, split, tileSize), split
+            ); //conversion matrix from world to lightspace -> light shadow projection matrix by view matrix
+        buffer.SetViewProjectionMatrices(viewMatrix, projectionMatrix);//I think these are just available?        ExecuteBuffer();
         //Only draws for materialas that have a lightMode tag for "ShadowCaster" pases
         context.DrawShadows(ref shadowSettings); // actually tell the context to draw
     }
 
+    //A function that takes the light matrix and the tile offset to make a conversion
+    //from wolrd to *shadow atlas* space UV coordinates that are corrected for the split
+    Matrix4x4 ConvertToAtlasMatrix(Matrix4x4 m, Vector2 offset, int split)
+    {
+        //Usually the depth is intuitively 0 depth and 1 is max
+        //other apis use 1 is 0 and 0 is max because of bit accuracy
+        if (SystemInfo.usesReversedZBuffer)
+        {
+            m.m20 = -m.m20;
+            m.m21 = -m.m21;
+            m.m22 = -m.m22;
+            m.m23 = -m.m23;
+        }
+        //Now we convert the clip coords from -1 to 1 to 0 to 1
+        //The texture coords are zero to one
+        //this is manual because the matrix multipication is too many operations
+
+        //the split and tile offset is calculated as a scalar
+        float scale = 1f / split;
+        m.m00 = (0.5f * (m.m00 + m.m30) + offset.x * m.m30) * scale;
+        m.m01 = (0.5f * (m.m01 + m.m31) + offset.x * m.m31) * scale;
+        m.m02 = (0.5f * (m.m02 + m.m32) + offset.x * m.m31) * scale;
+        m.m03 = (0.5f * (m.m03 + m.m33) + offset.x * m.m31) * scale;
+        m.m10 = (0.5f * (m.m10 + m.m30) + offset.y * m.m31) * scale;
+        m.m11 = (0.5f * (m.m11 + m.m31) + offset.y * m.m31) * scale;
+        m.m12 = (0.5f * (m.m12 + m.m32) + offset.y * m.m31) * scale;
+        m.m13 = (0.5f * (m.m13 + m.m33) + offset.y * m.m31) * scale;
+        m.m20 = 0.5f * (m.m20 + m.m30);
+        m.m21 = 0.5f * (m.m21 + m.m31);
+        m.m22 = 0.5f * (m.m22 + m.m32);
+        m.m23 = 0.5f * (m.m23 + m.m33);
+        return m;
+    }
+
     //This function sets the viewport for each directional light on the atlas
-    void SetTileViewport(int index, int split, int tileSize)
+    Vector2 SetTileViewport(int index, int split, int tileSize)
     {
         Vector2 offset = new Vector2(index % split, index / split);
         buffer.SetViewport(new Rect
         (
             offset.x * tileSize, offset.y * tileSize, tileSize, tileSize
-            ));
+            )
+            );
+        return offset;
     }
 
 
