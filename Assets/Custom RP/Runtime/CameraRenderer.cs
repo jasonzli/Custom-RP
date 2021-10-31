@@ -42,8 +42,11 @@ public partial class CameraRenderer
             return;
         }
 
-        Setup();
+        buffer.BeginSample(SampleName); //next the shadows into the camera
+        ExecuteBuffer();
         lighting.Setup(context, cullingResults, shadowSettings);
+        buffer.EndSample(SampleName);
+        Setup();
         DrawVisibleGeometry(useDynamicBatching, useGPUInstancing);
         DrawUnsupportedShaders();
         DrawGizmos();
