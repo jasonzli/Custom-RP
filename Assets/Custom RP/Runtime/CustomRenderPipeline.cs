@@ -10,13 +10,16 @@ public class CustomRenderPipeline : RenderPipeline
     //configurable pipeline
     bool useDynamicBatching, useGPUInstancing;
 
+    ShadowSettings shadowSettings;
     //Add a constructor to the render pipeline to set values
     public CustomRenderPipeline(
-        bool useDynamicBatching, bool useGPUInstancing, bool useSRPBatcher
+        bool useDynamicBatching, bool useGPUInstancing, bool useSRPBatcher,
+        ShadowSettings shadowSettings
     )
     {
         this.useDynamicBatching = useDynamicBatching;
         this.useGPUInstancing = useGPUInstancing;
+        this.shadowSettings = shadowSettings;
         //Takes precedence over dynamic batching
         GraphicsSettings.useScriptableRenderPipelineBatching = useSRPBatcher;
         GraphicsSettings.lightsUseLinearIntensity = true;
