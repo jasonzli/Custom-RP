@@ -41,6 +41,7 @@ public class Shadows
         shadowedDirectionalLightCount = 0;
     }
     //Reserve space for the shadow atlas for hte light's shadow map
+    //this is called by the lighting class
     public void ReserveDirectionalShadows(Light light, int visibleLightIndex)
     {
         //add light if there's space in our count

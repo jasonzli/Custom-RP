@@ -10,7 +10,7 @@ public class ShadowSettings
 
     public enum TextureSize
     {
-        _256 = 256, _512 = 512, _1024 = 1024, _2048 = 2048, _4096 = 4096, _8196
+        _256 = 256, _512 = 512, _1024 = 1024, _2048 = 2048, _4096 = 4096, _8196 = 8196
     }
 
     [System.Serializable]//this makes a hierarchical setting
