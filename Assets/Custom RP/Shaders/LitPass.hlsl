@@ -3,6 +3,7 @@
     
     #include "../ShaderLibrary/Common.hlsl"
     #include "../ShaderLibrary/Surface.hlsl"
+    #include "../ShaderLibrary/Shadows.hlsl"
     #include "../ShaderLibrary/Light.hlsl"
     #include "../ShaderLibrary/BRDF.hlsl"
     //BRDF is used in Lighting
