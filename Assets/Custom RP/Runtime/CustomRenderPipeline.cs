@@ -34,7 +34,8 @@ public class CustomRenderPipeline : RenderPipeline
         foreach (Camera camera in cameras)
         {//This lets us divert different cameras to do different things later.
          //THis is the scriptable renderer of the URP essentially
-            renderer.Render(context, camera, useDynamicBatching, useGPUInstancing);
+            renderer.Render(context, camera, useDynamicBatching, useGPUInstancing,
+                shadowSettings);
         }
     }
 
