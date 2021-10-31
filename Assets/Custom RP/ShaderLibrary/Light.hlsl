@@ -23,23 +23,27 @@
         return _DirectionalLightCount;
     }
     
-    DirectionalShadowData GetDirectionalShadowData(int lightIndex)
+    DirectionalShadowData GetDirectionalShadowData(
+        int lightIndex, ShadowData shadowData
+    )
     {
         DirectionalShadowData data;
         data.strength = _DirectionalLightShadowData[lightIndex].x;
-        data.tileIndex = _DirectionalLightShadowData[lightIndex].y;
+        data.tileIndex = _DirectionalLightShadowData[lightIndex].y + shadowData.cascadeIndex; //index corrections
         
         return data;
     }
     
     //a function GetDirectionalLight() that returns a Light with color and direction
-    Light GetDirectionalLight(int index, Surface surfaceWS)
+    Light GetDirectionalLight(int index, Surface surfaceWS, ShadowData shadowData)
     {
         Light light;
         light.color = _DirectionalLightColors[index].rgb;
         light.direction = _DirectionalLightDirections[index].xyz;
-        DirectionalShadowData shadowData = GetDirectionalShadowData(index);
-        light.attentuation = GetDirectionalShadowAttenuation(shadowData, surfaceWS);
+        DirectionalShadowData dirShadowData = GetDirectionalShadowData(index, shadowData);
+        light.attentuation = GetDirectionalShadowAttenuation(dirShadowData, surfaceWS);
+        
+        //light.attentuation = shadowData.cascadeIndex * .25; //use this to view the cascades in camera
         return light;
     }
     

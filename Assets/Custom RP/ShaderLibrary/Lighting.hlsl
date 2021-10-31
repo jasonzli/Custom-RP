@@ -13,10 +13,12 @@
     
     float3 GetLighting(Surface surfaceWS, BRDF brdf)
     {
+        ShadowData shadowData = GetShadowData(surfaceWS);
         float3 color = 0.0;
         for (int i = 0; i < GetDirectionalLightCount(); i++)
         {
-            color += GetLighting(surfaceWS, brdf, GetDirectionalLight(i, surfaceWS));
+            Light light = GetDirectionalLight(i, surfaceWS, shadowData); //get the attenuated light value
+            color += GetLighting(surfaceWS, brdf, light); //calculate the lit color of the fragment
         }
         return color;
     }

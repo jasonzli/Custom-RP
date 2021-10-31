@@ -10,8 +10,34 @@
     SAMPLER_CMP(SHADOW_SAMPLER); //CMP is a modified sampler that does not filter
     
     CBUFFER_START(_CustomShadows)
+    int _CascadeCount;
+    float4 _CascadeCullingSpheres[MAX_CASCADE_COUNT];
     float4x4 _DirectionalShadowMatrices[MAX_SHADOWED_DIRECTIONAL_LIGHT_COUNT * MAX_CASCADE_COUNT];
     CBUFFER_END
+    
+    struct ShadowData
+    {
+        int cascadeIndex;
+    };
+    
+    //this must be determined on a per-fragment basis, calculated by surface world space position
+    ShadowData GetShadowData(Surface surfaceWS)
+    {
+        ShadowData data;
+        int i;
+        for (i = 0; i < _CascadeCount; i++)
+        {
+            float4 sphere = _CascadeCullingSpheres[i];
+            float distanceSqr = DistanceSquared(surfaceWS.position, sphere.xyz);
+            if (distanceSqr < sphere.w) //sphere.w is square radius because we do that in Shadows.cs
+            {
+                //determine which cascade the fragment is in and return that index
+                break;
+            }
+        }
+        data.cascadeIndex = i;
+        return data;
+    }
     
     struct DirectionalShadowData
     {
