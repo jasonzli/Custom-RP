@@ -13,8 +13,12 @@ public class Shadows
 
     static int
         dirShadowAtlasId = Shader.PropertyToID("_DirectionalShadowAtlas"),
-        dirShadowMatricesId = Shader.PropertyToID("_DirectionalShadowMatrices");
+        dirShadowMatricesId = Shader.PropertyToID("_DirectionalShadowMatrices"),
+        cascadeCountId = Shader.PropertyToID("_CascadeCount"),
+        cascadeCullingSpheresId = Shader.PropertyToID("_CascadeCullingSpheres");
 
+    //This is actually the split data that is computed
+    static Vector4[] cascadeCullingSpheres = new Vector4[maxCascades]; //xyz position w is radius
     //transformation matrices for converting fragment positions to shadowmap UVs
     static Matrix4x4[]
         dirShadowMatrices = new Matrix4x4[maxShadowedDirectionalLightCount * maxCascades];
@@ -127,6 +131,10 @@ public class Shadows
             RenderDirectionalShadows(i, split, tileSize);
         }
 
+        //we've calcualted the cascade information in the RenderDirectionalShadows, now send it to shader
+        buffer.SetGlobalInt(cascadeCountId, settings.directional.cascadeCount);
+        buffer.SetGlobalVectorArray(cascadeCullingSpheresId, cascadeCullingSpheres);
+
         buffer.SetGlobalMatrixArray(dirShadowMatricesId, dirShadowMatrices);
 
         buffer.EndSample(bufferName);
@@ -155,6 +163,12 @@ public class Shadows
 
             shadowSettings.splitData = splitData; //splitData contains cull information about shadow casters
                                                   //set the texture coords per light (this is the annoying thing we get to defer in deferred renders)
+            if (index == 0)
+            {
+                Vector4 cullingSphere = splitData.cullingSphere;
+                cullingSphere.w *= cullingSphere.w; //precaulate square radius for distance comparison in shader
+                cascadeCullingSpheres[i] = cullingSphere; //for the first light, because all culling is same for all lights
+            }
             int tileIndex = tileOffset + i; //which tile we're rendering
             //add this light's conversion matrix to the array
             dirShadowMatrices[tileIndex] = ConvertToAtlasMatrix(
@@ -163,11 +177,12 @@ public class Shadows
                 ); //conversion matrix from world to lightspace -> light shadow projection matrix by view matrix
             buffer.SetViewProjectionMatrices(viewMatrix, projectionMatrix);//I think these are just available?        ExecuteBuffer();
                                                                            //Only draws for materialas that have a lightMode tag for "ShadowCaster" pases
-            ExecuteBuffer();
+            ExecuteBuffer(); //You forgot this and no shadows drew, keep track of how many ExecuteBuffer() commands there are
             context.DrawShadows(ref shadowSettings); // actually tell the context to draw
         }
 
     }
+
 
     //A function that takes the light matrix and the tile offset to make a conversion
     //from wolrd to *shadow atlas* space UV coordinates that are corrected for the split
