@@ -8,6 +8,9 @@ public class ShadowSettings
     [Min(0f)]
     public float maxDistance = 100f; // max distance of shadow
 
+    [Range(0.001f, 1f)]
+    public float distanceFade = 0.1f; // fade distance
+
     public enum TextureSize
     {
         _256 = 256, _512 = 512, _1024 = 1024, _2048 = 2048, _4096 = 4096, _8196 = 8196

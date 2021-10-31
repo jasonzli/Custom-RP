@@ -13,7 +13,7 @@
     int _CascadeCount;
     float4 _CascadeCullingSpheres[MAX_CASCADE_COUNT];
     float4x4 _DirectionalShadowMatrices[MAX_SHADOWED_DIRECTIONAL_LIGHT_COUNT * MAX_CASCADE_COUNT];
-    float _ShadowDistance;
+    float4 _ShadowDistanceFade;
     CBUFFER_END
     
     struct ShadowData
@@ -22,12 +22,21 @@
         float strength;
     };
     
+    //Faded shadows give the sense that light is accumulating at the distance
+    float FadedShadowStrength(float distance, float scale, float fade)
+    {
+        return saturate((1.0 - distance * scale) * fade); //fade by distance, this is linear
+    }
+    
     //this must be determined on a per-fragment basis, calculated by surface world space position
     ShadowData GetShadowData(Surface surfaceWS)
     {
         ShadowData data;
         //we have the surface position depth, so we can choose to set it 1 or 0 depending on if we're in the cascades
-        data.strength = surfaceWS.depth < _ShadowDistance ? 1.0: 0.0;
+        //calculate the fade by the set values
+        data.strength = FadedShadowStrength(
+            surfaceWS.depth, _ShadowDistanceFade.x, _ShadowDistanceFade.y
+        );
         int i;
         for (i = 0; i < _CascadeCount; i++)
         {

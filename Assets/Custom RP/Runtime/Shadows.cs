@@ -16,7 +16,7 @@ public class Shadows
         dirShadowMatricesId = Shader.PropertyToID("_DirectionalShadowMatrices"),
         cascadeCountId = Shader.PropertyToID("_CascadeCount"),
         cascadeCullingSpheresId = Shader.PropertyToID("_CascadeCullingSpheres"),
-        shadowDistanceId = Shader.PropertyToID("_ShadowDistance");
+        shadowDistanceFadeId = Shader.PropertyToID("_ShadowDistanceFade");
 
     //This is actually the split data that is computed
     static Vector4[] cascadeCullingSpheres = new Vector4[maxCascades]; //xyz position w is radius
@@ -138,7 +138,10 @@ public class Shadows
 
         //set the shadow transformation matrices
         buffer.SetGlobalMatrixArray(dirShadowMatricesId, dirShadowMatrices);
-        buffer.SetGlobalFloat(shadowDistanceId, settings.maxDistance);
+        buffer.SetGlobalVector(
+            shadowDistanceFadeId,
+            new Vector4(1f / settings.maxDistance, 1f / settings.distanceFade)
+        );
         buffer.EndSample(bufferName);
         ExecuteBuffer();
     }
