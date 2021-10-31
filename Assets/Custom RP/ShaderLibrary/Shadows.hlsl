@@ -18,12 +18,14 @@
     struct ShadowData
     {
         int cascadeIndex;
+        float strength;
     };
     
     //this must be determined on a per-fragment basis, calculated by surface world space position
     ShadowData GetShadowData(Surface surfaceWS)
     {
         ShadowData data;
+        data.strength = 1.0;
         int i;
         for (i = 0; i < _CascadeCount; i++)
         {
@@ -34,6 +36,11 @@
                 //determine which cascade the fragment is in and return that index
                 break;
             }
+        }
+        if (i == _CascadeCount)
+        {
+            //we might want to play with this
+            data.strength = 0.0; //if we're out of the cascades then no shadow strenght at all
         }
         data.cascadeIndex = i;
         return data;
