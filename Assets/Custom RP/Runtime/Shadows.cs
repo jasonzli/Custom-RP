@@ -9,7 +9,7 @@ using UnityEngine.Rendering;
 /// </summary>
 public class Shadows
 {
-    const int maxShadowedDirectionalLightCount = 4;//uhhhh i didn't know you had to limit this
+    const int maxShadowedDirectionalLightCount = 4, maxCascades = 4;//uhhhh i didn't know you had to limit this
 
     static int
         dirShadowAtlasId = Shader.PropertyToID("_DirectionalShadowAtlas"),
@@ -17,7 +17,8 @@ public class Shadows
 
     //transformation matrices for converting fragment positions to shadowmap UVs
     static Matrix4x4[]
-        dirShadowMatrices = new Matrix4x4[maxShadowedDirectionalLightCount]; int shadowedDirectionalLightCount;
+        dirShadowMatrices = new Matrix4x4[maxShadowedDirectionalLightCount * maxCascades];
+    int shadowedDirectionalLightCount;
     const string bufferName = "Shadows";
     CommandBuffer buffer = new CommandBuffer
     {
@@ -64,7 +65,9 @@ public class Shadows
                 };
             //return the index of the light, which corresponds to the shadow tile in the atlas
             return new Vector2(
-                light.shadowStrength, shadowedDirectionalLightCount++
+                light.shadowStrength,
+                //multiply this here so teh cascades make multiple tiles
+                settings.directional.cascadeCount * shadowedDirectionalLightCount++
             );
         }
         return Vector2.zero;
@@ -114,7 +117,9 @@ public class Shadows
         buffer.BeginSample(bufferName);
         ExecuteBuffer();
 
-        int split = shadowedDirectionalLightCount <= 1 ? 1 : 2;
+        //calculate the number of tiles we need for the shadows
+        int tiles = shadowedDirectionalLightCount * settings.directional.cascadeCount;
+        int split = tiles <= 1 ? 1 : tiles <= 4 ? 2 : 4;//split into 1x2,2x2, or 4x4
         int tileSize = atlasSize / split;
 
         for (int i = 0; i < shadowedDirectionalLightCount; i++)
@@ -128,27 +133,40 @@ public class Shadows
         ExecuteBuffer();
     }
 
+    //Draws the shadows for each cascade, putting them into tiles for the atlas
+    //The atlas has all the shadows broken down into cascaded tiles
     void RenderDirectionalShadows(int index, int split, int tileSize)
     {
         ShadowedDirectionalLight light = shadowedDirectionalLights[index];
         var shadowSettings =
             new ShadowDrawingSettings(cullingResults, light.visibleLightIndex);
-        cullingResults.ComputeDirectionalShadowMatricesAndCullingPrimitives(
-            light.visibleLightIndex, 0, 1, Vector3.zero, tileSize, 0f,
+        //how mnay cascades and thus tiles, plus the detail ratios
+        int cascadeCount = settings.directional.cascadeCount;
+        int tileOffset = index * cascadeCount;
+        Vector3 ratios = settings.directional.CascadeRatios;
+
+        //anywhere from 1 to 4 cascades
+        for (int i = 0; i < cascadeCount; i++)
+        {
+            cullingResults.ComputeDirectionalShadowMatricesAndCullingPrimitives(
+            light.visibleLightIndex, i, cascadeCount, ratios, tileSize, 0f,
             out Matrix4x4 viewMatrix, out Matrix4x4 projectionMatrix,
-            out ShadowSplitData splitData
-        );
-        shadowSettings.splitData = splitData; //splitData contains cull information about shadow casters
-        //set the texture coords per light (this is the annoying thing we get to defer in deferred renders)
-        SetTileViewport(index, split, tileSize);
-        //add this light's conversion matrix to the array
-        dirShadowMatrices[index] = ConvertToAtlasMatrix(
-            projectionMatrix * viewMatrix,
-            SetTileViewport(index, split, tileSize), split
-            ); //conversion matrix from world to lightspace -> light shadow projection matrix by view matrix
-        buffer.SetViewProjectionMatrices(viewMatrix, projectionMatrix);//I think these are just available?        ExecuteBuffer();
-        //Only draws for materialas that have a lightMode tag for "ShadowCaster" pases
-        context.DrawShadows(ref shadowSettings); // actually tell the context to draw
+            out ShadowSplitData splitData);
+
+            shadowSettings.splitData = splitData; //splitData contains cull information about shadow casters
+                                                  //set the texture coords per light (this is the annoying thing we get to defer in deferred renders)
+            int tileIndex = tileOffset + i; //which tile we're rendering
+            //add this light's conversion matrix to the array
+            dirShadowMatrices[tileIndex] = ConvertToAtlasMatrix(
+                projectionMatrix * viewMatrix,
+                SetTileViewport(tileIndex, split, tileSize), split
+                ); //conversion matrix from world to lightspace -> light shadow projection matrix by view matrix
+            buffer.SetViewProjectionMatrices(viewMatrix, projectionMatrix);//I think these are just available?        ExecuteBuffer();
+                                                                           //Only draws for materialas that have a lightMode tag for "ShadowCaster" pases
+            ExecuteBuffer();
+            context.DrawShadows(ref shadowSettings); // actually tell the context to draw
+        }
+
     }
 
     //A function that takes the light matrix and the tile offset to make a conversion

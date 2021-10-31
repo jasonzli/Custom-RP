@@ -2,6 +2,7 @@
     #define CUSTOM_SHADOWS_INCLUDED
     
     #define MAX_SHADOWED_DIRECTIONAL_LIGHT_COUNT 4
+    #define MAX_CASCADE_COUNT 4
     
     //shadow atlas is not a regular texture so use _SHADOW version
     TEXTURE2D_SHADOW(_DirectionalShadowAtlas);
@@ -9,7 +10,7 @@
     SAMPLER_CMP(SHADOW_SAMPLER); //CMP is a modified sampler that does not filter
     
     CBUFFER_START(_CustomShadows)
-    float4x4 _DirectionalShadowMatrices[MAX_SHADOWED_DIRECTIONAL_LIGHT_COUNT];
+    float4x4 _DirectionalShadowMatrices[MAX_SHADOWED_DIRECTIONAL_LIGHT_COUNT * MAX_CASCADE_COUNT];
     CBUFFER_END
     
     struct DirectionalShadowData
