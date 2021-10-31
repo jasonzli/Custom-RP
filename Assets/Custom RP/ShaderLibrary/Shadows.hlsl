@@ -37,6 +37,8 @@
         data.strength = FadedShadowStrength(
             surfaceWS.depth, _ShadowDistanceFade.x, _ShadowDistanceFade.y
         );
+        
+        //determine which cascade the fragment is in and return that index
         int i;
         for (i = 0; i < _CascadeCount; i++)
         {
@@ -44,7 +46,14 @@
             float distanceSqr = DistanceSquared(surfaceWS.position, sphere.xyz);
             if (distanceSqr < sphere.w) //sphere.w is square radius because we do that in Shadows.cs
             {
-                //determine which cascade the fragment is in and return that index
+                //check if we're in the last cascade and fade as necessary with square fade
+                if (i == _CascadeCount - 1)
+                {
+                    data.strength *= FadedShadowStrength(
+                        distanceSqr, 1.0 / sphere.w, _ShadowDistanceFade.z
+                    );
+                }
+                
                 break;
             }
         }

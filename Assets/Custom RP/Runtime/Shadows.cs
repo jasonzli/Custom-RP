@@ -138,9 +138,13 @@ public class Shadows
 
         //set the shadow transformation matrices
         buffer.SetGlobalMatrixArray(dirShadowMatricesId, dirShadowMatrices);
+
+        float f = 1f - settings.directional.cascadeFade;
         buffer.SetGlobalVector(
             shadowDistanceFadeId,
-            new Vector4(1f / settings.maxDistance, 1f / settings.distanceFade)
+            new Vector4(1f / settings.maxDistance, 1f / settings.distanceFade,
+            1f / (1f - f * f)
+            ) //cascade fade value is an inverse square because cascades are calculated in squared values
         );
         buffer.EndSample(bufferName);
         ExecuteBuffer();
