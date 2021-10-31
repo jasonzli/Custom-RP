@@ -3,6 +3,7 @@
     
     struct Surface
     {
+        float3 position; //for shadows
         float3 normal; //could be defined in any space because we don't care... from the POV of the surface
         float3 viewDirection;
         float3 color;

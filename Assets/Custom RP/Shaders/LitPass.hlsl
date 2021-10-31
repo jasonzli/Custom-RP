@@ -79,6 +79,7 @@
         //base.rgb = abs(length(input.normalWS) - 1.0) * 10.0;
         
         Surface surface;
+        surface.position = input.positionWS;
         surface.normal = normalize(input.normalWS);
         surface.viewDirection = normalize(_WorldSpaceCameraPos - input.positionWS);
         surface.color = base.rgb;
