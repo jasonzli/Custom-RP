@@ -48,7 +48,7 @@ public class Shadows
     }
     //Reserve space for the shadow atlas for hte light's shadow map
     //this is called by the lighting class
-    public void ReserveDirectionalShadows(Light light, int visibleLightIndex)
+    public Vector2 ReserveDirectionalShadows(Light light, int visibleLightIndex)
     {
         //add light if there's space in our count
         if (shadowedDirectionalLightCount < maxShadowedDirectionalLightCount &&
@@ -57,12 +57,17 @@ public class Shadows
             //check if the light is in the bounds of the cull, returns if the bounds are valid
             cullingResults.GetShadowCasterBounds(visibleLightIndex, out Bounds b))
         {
-            shadowedDirectionalLights[shadowedDirectionalLightCount++] =
+            shadowedDirectionalLights[shadowedDirectionalLightCount] =
                 new ShadowedDirectionalLight
                 {
                     visibleLightIndex = visibleLightIndex //index of the shadowable directional light
                 };
+            //return the index of the light, which corresponds to the shadow tile in the atlas
+            return new Vector2(
+                light.shadowStrength, shadowedDirectionalLightCount++
+            );
         }
+        return Vector2.zero;
     }
 
     //skip if no shadowed lights

@@ -10,11 +10,13 @@ public class Lighting
     static int
         dirLightCountId = Shader.PropertyToID("_DirectionalLightCount"),
         dirLightColorsId = Shader.PropertyToID("_DirectionalLightColors"),
-        dirLightDirectionsId = Shader.PropertyToID("_DirectionalLightDirections");
+        dirLightDirectionsId = Shader.PropertyToID("_DirectionalLightDirections"),
+        dirLightShadowDataId = Shader.PropertyToID("_DirectionalLightShadowData");
 
     static Vector4[]
         dirLightColors = new Vector4[maxDirLightCount],
-        dirLightDirections = new Vector4[maxDirLightCount];
+        dirLightDirections = new Vector4[maxDirLightCount],
+        dirLightShadowData = new Vector4[maxDirLightCount];
     CommandBuffer buffer = new CommandBuffer
     {
         name = bufferName
@@ -58,6 +60,7 @@ public class Lighting
         buffer.SetGlobalInt(dirLightCountId, visibleLights.Length);
         buffer.SetGlobalVectorArray(dirLightColorsId, dirLightColors);
         buffer.SetGlobalVectorArray(dirLightDirectionsId, dirLightDirections);
+        buffer.SetGlobalVectorArray(dirLightShadowDataId, dirLightShadowData);
     }
 
     //This function sets the array of directional lights that we pass to the CBUFFER on the GPU
@@ -65,7 +68,9 @@ public class Lighting
     {
         dirLightColors[index] = visibleLight.finalColor; //not in linear space, must be converted in pipeline with GraphicsSettings.lightsUseLinearIntensity
         dirLightDirections[index] = -visibleLight.localToWorldMatrix.GetColumn(2); //the forward vector!
-        shadows.ReserveDirectionalShadows(visibleLight.light, index);
+        dirLightShadowData[index] =
+            shadows.ReserveDirectionalShadows(visibleLight.light, index);
+
     }
 
     //cleanup is called by camera, which is the thing calling the render
