@@ -10,7 +10,7 @@ using UnityEngine.Rendering;
 public class Shadows
 {
     static int dirShadowAtlasId = Shader.PropertyToID("_DirectionalShadowAtlas");
-    const int maxShadowedDirectionalLightCount = 1;//uhhhh i didn't know you had to limit this
+    const int maxShadowedDirectionalLightCount = 4;//uhhhh i didn't know you had to limit this
     int shadowedDirectionalLightCount;
     const string bufferName = "Shadows";
     CommandBuffer buffer = new CommandBuffer
@@ -102,16 +102,19 @@ public class Shadows
         buffer.BeginSample(bufferName);
         ExecuteBuffer();
 
+        int split = shadowedDirectionalLightCount <= 1 ? 1 : 2;
+        int tileSize = atlasSize / split;
+
         for (int i = 0; i < shadowedDirectionalLightCount; i++)
         {
-            RenderDirectionalShadows(i, atlasSize);
+            RenderDirectionalShadows(i, split, tileSize);
         }
 
         buffer.EndSample(bufferName);
         ExecuteBuffer();
     }
 
-    void RenderDirectionalShadows(int index, int tileSize)
+    void RenderDirectionalShadows(int index, int split, int tileSize)
     {
         ShadowedDirectionalLight light = shadowedDirectionalLights[index];
         var shadowSettings =
@@ -122,11 +125,23 @@ public class Shadows
             out ShadowSplitData splitData
         );
         shadowSettings.splitData = splitData; //splitData contains cull information about shadow casters
+        SetTileViewport(index, split, tileSize);
         buffer.SetViewProjectionMatrices(viewMatrix, projectionMatrix);//I think these are just available?
         ExecuteBuffer();
         //Only draws for materialas that have a lightMode tag for "ShadowCaster" pases
         context.DrawShadows(ref shadowSettings); // actually tell the context to draw
     }
+
+    //This function sets the viewport for each directional light on the atlas
+    void SetTileViewport(int index, int split, int tileSize)
+    {
+        Vector2 offset = new Vector2(index % split, index / split);
+        buffer.SetViewport(new Rect
+        (
+            offset.x * tileSize, offset.y * tileSize, tileSize, tileSize
+            ));
+    }
+
 
     void ExecuteBuffer()
     {
