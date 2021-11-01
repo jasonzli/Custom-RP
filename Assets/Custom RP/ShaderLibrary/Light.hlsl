@@ -4,6 +4,7 @@
     #define MAX_DIRECTIONAL_LIGHT_COUNT 4
     
     //a cbuffer called _CustomLight that contains directional light direction and color
+    //all constant buffers are set in c#
     CBUFFER_START(_CustomLight)
     int _DirectionalLightCount;
     float4 _DirectionalLightColors[MAX_DIRECTIONAL_LIGHT_COUNT];
@@ -30,7 +31,7 @@
         DirectionalShadowData data;
         data.strength = _DirectionalLightShadowData[lightIndex].x * shadowData.strength;
         data.tileIndex = _DirectionalLightShadowData[lightIndex].y + shadowData.cascadeIndex; //index corrections
-        
+        data.normalBias = _DirectionalLightShadowData[lightIndex].z;
         return data;
     }
     

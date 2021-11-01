@@ -23,6 +23,13 @@
         float strength;
     };
     
+    struct DirectionalShadowData
+    {
+        float strength;
+        int tileIndex;
+        float normalBias; //multiply this value against the texel normal to scale the offset
+    };
+    
     //Faded shadows give the sense that light is accumulating at the distance
     float FadedShadowStrength(float distance, float scale, float fade)
     {
@@ -68,11 +75,6 @@
         return data;
     }
     
-    struct DirectionalShadowData
-    {
-        float strength;
-        int tileIndex;
-    };
     
     float SampleDirectionalShadowAtlas(float3 positionSTS)
     {
@@ -91,7 +93,10 @@
         {
             return 1.0;
         }
-        float3 normalBias = surfaceWS.normal * _CascadeData[global.cascadeIndex].y; //move normal by texelSize
+        float3 normalBias = surfaceWS.normal *
+        //directional normalBias multiplied into the texel offset
+        (directional.normalBias * _CascadeData[global.cascadeIndex].y); //move normal by texelSize
+        
         //conversion from position to shadow space
         float3 positionSTS = mul(
             _DirectionalShadowMatrices[directional.tileIndex],

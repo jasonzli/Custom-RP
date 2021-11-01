@@ -40,6 +40,7 @@ public class Shadows
     struct ShadowedDirectionalLight
     {
         public int visibleLightIndex;
+        public float slopeScaleBias;
     }
 
     ShadowedDirectionalLight[] shadowedDirectionalLights =
@@ -57,7 +58,7 @@ public class Shadows
     }
     //Reserve space for the shadow atlas for hte light's shadow map
     //this is called by the lighting class
-    public Vector2 ReserveDirectionalShadows(Light light, int visibleLightIndex)
+    public Vector3 ReserveDirectionalShadows(Light light, int visibleLightIndex)
     {
         //add light if there's space in our count
         if (shadowedDirectionalLightCount < maxShadowedDirectionalLightCount &&
@@ -69,16 +70,18 @@ public class Shadows
             shadowedDirectionalLights[shadowedDirectionalLightCount] =
                 new ShadowedDirectionalLight
                 {
-                    visibleLightIndex = visibleLightIndex //index of the shadowable directional light
+                    visibleLightIndex = visibleLightIndex, //index of the shadowable directional light
+                    slopeScaleBias = light.shadowBias //use light bias as slope bias. we hijacked the original bias value
                 };
             //return the index of the light, which corresponds to the shadow tile in the atlas
-            return new Vector2(
+            return new Vector3(
                 light.shadowStrength,
                 //multiply this here so teh cascades make multiple tiles
-                settings.directional.cascadeCount * shadowedDirectionalLightCount++
+                settings.directional.cascadeCount * shadowedDirectionalLightCount++,
+                light.shadowNormalBias
             );
         }
-        return Vector2.zero;
+        return Vector3.zero;
     }
 
     //skip if no shadowed lights
@@ -167,6 +170,7 @@ public class Shadows
         Vector3 ratios = settings.directional.CascadeRatios;
 
         //anywhere from 1 to 4 cascades
+        //we render this for # of cascades * # of lights        
         for (int i = 0; i < cascadeCount; i++)
         {
             cullingResults.ComputeDirectionalShadowMatricesAndCullingPrimitives(
@@ -196,9 +200,11 @@ public class Shadows
             //Slope scale bias, increases bias linearly with slope of the angle between surface and light
             //buffer.SetGlobalDepthBias(0f, 3f);
 
+            //use configured light slope bias
+            buffer.SetGlobalDepthBias(0f, light.slopeScaleBias);
             ExecuteBuffer(); //You forgot this and no shadows drew, keep track of how many ExecuteBuffer() commands there are
             context.DrawShadows(ref shadowSettings); // actually tell the context to draw
-            //buffer.SetGlobalDepthBias(0f, 0f); remember to turn off depth bias after shadows are drawn
+            buffer.SetGlobalDepthBias(0f, 0f); //remember to turn off depth bias after shadows are drawn
         }
 
     }
