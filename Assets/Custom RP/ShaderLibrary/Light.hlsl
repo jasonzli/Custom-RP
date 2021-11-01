@@ -41,7 +41,7 @@
         light.color = _DirectionalLightColors[index].rgb;
         light.direction = _DirectionalLightDirections[index].xyz;
         DirectionalShadowData dirShadowData = GetDirectionalShadowData(index, shadowData);
-        light.attentuation = GetDirectionalShadowAttenuation(dirShadowData, surfaceWS);
+        light.attentuation = GetDirectionalShadowAttenuation(dirShadowData, shadowData, surfaceWS);
         
         //light.attentuation = shadowData.cascadeIndex * .25; //use this to view the cascades in camera
         return light;

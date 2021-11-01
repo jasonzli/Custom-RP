@@ -205,10 +205,13 @@ public class Shadows
 
     void SetCascadeData(int index, Vector4 cullingSphere, float tileSize)
     {
-
+        float texelSize = 2f * cullingSphere.w / tileSize; //this is worldspace texelSize
         cullingSphere.w *= cullingSphere.w; //precaulate square radius for distance comparison in shader
         cascadeCullingSpheres[index] = cullingSphere;
-        cascadeData[index].x = 1f / cullingSphere.w; //inverse squared radius
+        cascadeData[index] = new Vector4(
+            1f / cullingSphere.w, //inverse squared radius
+            texelSize * 1.4142136f //sqrt 2
+        );
     }
 
     //A function that takes the light matrix and the tile offset to make a conversion

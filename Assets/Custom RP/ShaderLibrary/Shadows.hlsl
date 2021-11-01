@@ -30,6 +30,7 @@
     }
     
     //this must be determined on a per-fragment basis, calculated by surface world space position
+    //Conversion into which cascade it belongs to
     ShadowData GetShadowData(Surface surfaceWS)
     {
         ShadowData data;
@@ -82,22 +83,25 @@
     
     //The attentuation is a factor of how much light is being received by the surface.
     //This modifies the light
-    float GetDirectionalShadowAttenuation(DirectionalShadowData data, Surface surfaceWS)
+    float GetDirectionalShadowAttenuation(
+        DirectionalShadowData directional, ShadowData global, Surface surfaceWS
+    )
     {
-        if (data.strength <= 0.0)
+        if (directional.strength <= 0.0)
         {
             return 1.0;
         }
+        float3 normalBias = surfaceWS.normal * _CascadeData[global.cascadeIndex].y; //move normal by texelSize
         //conversion from position to shadow space
         float3 positionSTS = mul(
-            _DirectionalShadowMatrices[data.tileIndex],
-            float4(surfaceWS.position, 1.0)
+            _DirectionalShadowMatrices[directional.tileIndex],
+            float4(surfaceWS.position + normalBias, 1.0)
         ).xyz;
         float shadow = SampleDirectionalShadowAtlas(positionSTS);
         
         //when strength is zero then it should be 1.0 (no attentuation of light)
         //strength is how much of the shadow we read, and not the amount of shadow
         //this is an artistic indirection
-        return lerp(1.0, shadow, data.strength);
+        return lerp(1.0, shadow, directional.strength);
     }
 #endif
