@@ -16,10 +16,13 @@ public class Shadows
         dirShadowMatricesId = Shader.PropertyToID("_DirectionalShadowMatrices"),
         cascadeCountId = Shader.PropertyToID("_CascadeCount"),
         cascadeCullingSpheresId = Shader.PropertyToID("_CascadeCullingSpheres"),
+        cascadeDataId = Shader.PropertyToID("_CascadeData"),
         shadowDistanceFadeId = Shader.PropertyToID("_ShadowDistanceFade");
 
     //This is actually the split data that is computed
-    static Vector4[] cascadeCullingSpheres = new Vector4[maxCascades]; //xyz position w is radius
+    static Vector4[]
+        cascadeCullingSpheres = new Vector4[maxCascades],
+        cascadeData = new Vector4[maxCascades]; //xyz position w is radius
     //transformation matrices for converting fragment positions to shadowmap UVs
     static Matrix4x4[]
         dirShadowMatrices = new Matrix4x4[maxShadowedDirectionalLightCount * maxCascades];
@@ -135,6 +138,7 @@ public class Shadows
         //we've calcualted the cascade information in the RenderDirectionalShadows, now send it to shader
         buffer.SetGlobalInt(cascadeCountId, settings.directional.cascadeCount);
         buffer.SetGlobalVectorArray(cascadeCullingSpheresId, cascadeCullingSpheres);
+        buffer.SetGlobalVectorArray(cascadeDataId, cascadeData);
 
         //set the shadow transformation matrices
         buffer.SetGlobalMatrixArray(dirShadowMatricesId, dirShadowMatrices);
@@ -172,11 +176,9 @@ public class Shadows
 
             shadowSettings.splitData = splitData; //splitData contains cull information about shadow casters
                                                   //set the texture coords per light (this is the annoying thing we get to defer in deferred renders)
-            if (index == 0)
+            if (index == 0) //for the first light, because all culling is same for all lights
             {
-                Vector4 cullingSphere = splitData.cullingSphere;
-                cullingSphere.w *= cullingSphere.w; //precaulate square radius for distance comparison in shader
-                cascadeCullingSpheres[i] = cullingSphere; //for the first light, because all culling is same for all lights
+                SetCascadeData(i, splitData.cullingSphere, tileSize);
             }
             int tileIndex = tileOffset + i; //which tile we're rendering
             //add this light's conversion matrix to the array
@@ -201,6 +203,13 @@ public class Shadows
 
     }
 
+    void SetCascadeData(int index, Vector4 cullingSphere, float tileSize)
+    {
+
+        cullingSphere.w *= cullingSphere.w; //precaulate square radius for distance comparison in shader
+        cascadeCullingSpheres[index] = cullingSphere;
+        cascadeData[index].x = 1f / cullingSphere.w; //inverse squared radius
+    }
 
     //A function that takes the light matrix and the tile offset to make a conversion
     //from wolrd to *shadow atlas* space UV coordinates that are corrected for the split
