@@ -186,8 +186,17 @@ public class Shadows
                 ); //conversion matrix from world to lightspace -> light shadow projection matrix by view matrix
             buffer.SetViewProjectionMatrices(viewMatrix, projectionMatrix);//I think these are just available?        ExecuteBuffer();
                                                                            //Only draws for materialas that have a lightMode tag for "ShadowCaster" pases
+
+            //Depth bias only approach
+            //buffer.SetGlobalDepthBias(50000f, 0f);
+            //Stronger depth bias, peter panning
+            //buffer.SetGlobalDepthBias(500000f, 0f);
+            //Slope scale bias, increases bias linearly with slope of the angle between surface and light
+            //buffer.SetGlobalDepthBias(0f, 3f);
+
             ExecuteBuffer(); //You forgot this and no shadows drew, keep track of how many ExecuteBuffer() commands there are
             context.DrawShadows(ref shadowSettings); // actually tell the context to draw
+            //buffer.SetGlobalDepthBias(0f, 0f); remember to turn off depth bias after shadows are drawn
         }
 
     }
