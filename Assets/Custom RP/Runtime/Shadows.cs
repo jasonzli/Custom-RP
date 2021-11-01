@@ -41,6 +41,7 @@ public class Shadows
     {
         public int visibleLightIndex;
         public float slopeScaleBias;
+        public float nearPlaneOffset;
     }
 
     ShadowedDirectionalLight[] shadowedDirectionalLights =
@@ -71,7 +72,8 @@ public class Shadows
                 new ShadowedDirectionalLight
                 {
                     visibleLightIndex = visibleLightIndex, //index of the shadowable directional light
-                    slopeScaleBias = light.shadowBias //use light bias as slope bias. we hijacked the original bias value
+                    slopeScaleBias = light.shadowBias, //use light bias as slope bias. we hijacked the original bias value
+                    nearPlaneOffset = light.shadowNearPlane //use this to pull the near plane so shadows still draw
                 };
             //return the index of the light, which corresponds to the shadow tile in the atlas
             return new Vector3(
@@ -174,8 +176,8 @@ public class Shadows
         for (int i = 0; i < cascadeCount; i++)
         {
             cullingResults.ComputeDirectionalShadowMatricesAndCullingPrimitives(
-            light.visibleLightIndex, i, cascadeCount, ratios, tileSize, 0f,
-            out Matrix4x4 viewMatrix, out Matrix4x4 projectionMatrix,
+            light.visibleLightIndex, i, cascadeCount, ratios, tileSize,
+            light.nearPlaneOffset, out Matrix4x4 viewMatrix, out Matrix4x4 projectionMatrix,
             out ShadowSplitData splitData);
 
             shadowSettings.splitData = splitData; //splitData contains cull information about shadow casters

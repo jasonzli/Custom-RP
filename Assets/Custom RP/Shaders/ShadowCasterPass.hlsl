@@ -38,6 +38,13 @@
         //float4's guidance: 0.0 for direction, 1.0 for point
         float3 positionWS = TransformObjectToWorld(input.positionOS);
         output.positionCS = TransformWorldToHClip(positionWS);
+        
+        #if UNITY_REVERSED_Z
+            output.positionCS.z = min(output.positionCS.z, output.positionCS.w * UNITY_NEAR_CLIP_VALUE);
+        #else
+            output.positionCS.z = min(output.posiitonCS.z, output.posiitonCS.w * UNITY_NEAR_CLIP_VALUE);
+        #endif
+        
         float4 baseST = UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _BaseMap_ST);
         //apply scaling and translation in vertex step so the coords are scaled in fragment
         //xy is scale, zw is translation
