@@ -17,7 +17,14 @@ public class Shadows
         cascadeCountId = Shader.PropertyToID("_CascadeCount"),
         cascadeCullingSpheresId = Shader.PropertyToID("_CascadeCullingSpheres"),
         cascadeDataId = Shader.PropertyToID("_CascadeData"),
+        shadowAtlasSizeId = Shader.PropertyToID("_ShadowAtlasSize"),
         shadowDistanceFadeId = Shader.PropertyToID("_ShadowDistanceFade");
+    //keywords for filtering the shadows
+    static string[] directionalFilterKeywords = {
+        "_DIRECTIONAL_PCF3",
+        "_DIRECTIONAL_PCF5",
+        "_DIRECTIONAL_PCF7",
+    };
 
     //This is actually the split data that is computed
     static Vector4[]
@@ -155,6 +162,11 @@ public class Shadows
             1f / (1f - f * f)
             ) //cascade fade value is an inverse square because cascades are calculated in squared values
         );
+
+        SetKeywords();
+        buffer.SetGlobalVector( //we need this vector to do filtering
+            shadowAtlasSizeId, new Vector4(atlasSize, 1f / atlasSize)
+        );
         buffer.EndSample(bufferName);
         ExecuteBuffer();
     }
@@ -214,11 +226,14 @@ public class Shadows
     void SetCascadeData(int index, Vector4 cullingSphere, float tileSize)
     {
         float texelSize = 2f * cullingSphere.w / tileSize; //this is worldspace texelSize
+        float filterSize = texelSize * ((float)settings.directional.filter + 1f); //when we filter we need to move the normal bias by its filter size
+        cullingSphere.w -= filterSize; //move the sphere by filterSize to prevent sampling outside of the sphere
         cullingSphere.w *= cullingSphere.w; //precaulate square radius for distance comparison in shader
         cascadeCullingSpheres[index] = cullingSphere;
         cascadeData[index] = new Vector4(
             1f / cullingSphere.w, //inverse squared radius
-            texelSize * 1.4142136f //sqrt 2
+            filterSize * 1.4142136f //multiply by the filterSize basis for texel offset
+                                    //texelSize * 1.4142136f // without filter //sqrt 2
         );
     }
 
@@ -267,6 +282,22 @@ public class Shadows
         return offset;
     }
 
+    void SetKeywords()
+    {
+        int enabledIndex = (int)settings.directional.filter - 1;
+        //enabled the correct keyword for tthe filter
+        for (int i = 0; i < directionalFilterKeywords.Length; i++)
+        {
+            if (i == enabledIndex)
+            {
+                buffer.EnableShaderKeyword(directionalFilterKeywords[i]);
+            }
+            else
+            {
+                buffer.DisableShaderKeyword(directionalFilterKeywords[i]);
+            }
+        }
+    }
 
     void ExecuteBuffer()
     {

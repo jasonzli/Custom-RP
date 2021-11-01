@@ -32,6 +32,7 @@ Shader "Custom RP/Lit"
             //adds clipping as a feature to turn off for the shader
             #pragma shader_feature _CLIPPING
             #pragma shader_feature _PREMULTIPLY_ALPHA
+            #pragma multi_compile _ _DIRECTIONAL_PCF3 _DIRECTIONAL_PCF5 _DIRECTIONAL_PCF7
             //generates two versions of the shader: one for instancing and one without.
             #pragma multi_compile_instancing
             

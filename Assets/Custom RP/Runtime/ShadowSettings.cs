@@ -16,10 +16,16 @@ public class ShadowSettings
         _256 = 256, _512 = 512, _1024 = 1024, _2048 = 2048, _4096 = 4096, _8196 = 8196
     }
 
+    public enum FilterMode //determine which filter mode we sent to the shader
+    {
+        PCF2x2, PCF3x3, PCF5x5, PCF7x7
+    }
+
     [System.Serializable]//this makes a hierarchical setting
     public struct Directional
     {
         public TextureSize atlasSize;
+        public FilterMode filter;
         [Range(1, 4)] public int cascadeCount;
         [Range(0f, 1f)] public float cascadeRatio1, cascadeRatio2, cascadeRatio3;
         public Vector3 CascadeRatios =>
@@ -32,6 +38,7 @@ public class ShadowSettings
     public Directional directional = new Directional
     {
         atlasSize = TextureSize._1024,
+        filter = FilterMode.PCF2x2,
         cascadeCount = 4,
         cascadeRatio1 = .1f,
         cascadeRatio2 = .25f,

@@ -454,7 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.06885248, g: 0.07916049, b: 0.114648715, a: 1}
+  baseColor: {r: 0.042502876, g: 0.66435605, b: 0.08203736, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -851,7 +851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.24735466, g: 0.0118541755, b: 0.025343996, a: 1}
+  baseColor: {r: 0.93230414, g: 0.22004673, b: 0.49170586, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -1248,7 +1248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.531897, g: 0.2896815, b: 0.14432244, a: 1}
+  baseColor: {r: 0.17485757, g: 0.19880345, b: 0.16716258, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -1740,7 +1740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.22332717, g: 0.2751527, b: 0.024411768, a: 1}
+  baseColor: {r: 0.21755284, g: 0.33770326, b: 0.2864649, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -2135,7 +2135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.033468846, g: 0.029634388, b: 0.008883393, a: 1}
+  baseColor: {r: 0.27268562, g: 0.6927938, b: 0.27059156, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -2533,7 +2533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.24903148, g: 0.30030644, b: 0.4027441, a: 1}
+  baseColor: {r: 0.5130364, g: 0.6288021, b: 0.71398705, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -2930,7 +2930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.10117525, g: 0.14399935, b: 0.12428505, a: 1}
+  baseColor: {r: 0.023808463, g: 0.11046232, b: 0.036293935, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -3042,7 +3042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.43672556, g: 0.29752538, b: 0.52918, a: 1}
+  baseColor: {r: 0.18226662, g: 0.7224582, b: 0.12237639, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -3534,7 +3534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.17871144, g: 0.4011367, b: 0.31381252, a: 1}
+  baseColor: {r: 0.77797973, g: 0.024731897, b: 0.5640276, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -3836,7 +3836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.33964482, g: 0.26384586, b: 0.18645766, a: 1}
+  baseColor: {r: 0.050274927, g: 0.06411994, b: 0.050024223, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -4043,7 +4043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.61747223, g: 0.27977556, b: 0.227995, a: 1}
+  baseColor: {r: 0.25201994, g: 0.24128097, b: 0.71606237, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -4250,7 +4250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.10433031, g: 0.14837302, b: 0.0073657585, a: 1}
+  baseColor: {r: 0.15012242, g: 0.058169965, b: 0.13474147, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -4362,7 +4362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.035556164, g: 0.036361773, b: 0.037378434, a: 1}
+  baseColor: {r: 0.3490356, g: 0.69599676, b: 0.9500134, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -4757,7 +4757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.025098836, g: 0.19378749, b: 0.13035388, a: 1}
+  baseColor: {r: 0.088719256, g: 0.06400381, b: 0.058711126, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -4952,7 +4952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.32559523, g: 0.34039226, b: 0.038345322, a: 1}
+  baseColor: {r: 0.19978577, g: 0.32553437, b: 0.1702118, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -5140,7 +5140,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 920752022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.61, y: 3.89, z: 4.34}
+  m_LocalPosition: {x: 3.45, y: -9.08, z: 6.44}
   m_LocalScale: {x: 4.3509, y: 4.3509, z: 4.3509}
   m_Children: []
   m_Father: {fileID: 1947947079}
@@ -5727,7 +5727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.39249068, g: 0.084946595, b: 0.21723025, a: 1}
+  baseColor: {r: 0.61343735, g: 0.60034233, b: 0.6050715, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -6124,7 +6124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.35078728, g: 0.36324218, b: 0.36248806, a: 1}
+  baseColor: {r: 0.75843716, g: 0.86424327, b: 0.6567221, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -6331,7 +6331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.5692338, g: 0.583477, b: 0.58769697, a: 1}
+  baseColor: {r: 0.014727185, g: 0.086071424, b: 0.1974378, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -7108,7 +7108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.7957052, g: 0.005880943, b: 0.6471277, a: 1}
+  baseColor: {r: 0.08124327, g: 0.014401199, b: 0.23048249, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -8075,7 +8075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.8269204, g: 0.3867311, b: 0.5993643, a: 1}
+  baseColor: {r: 0.24177621, g: 0.23488294, b: 0.27015367, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -8660,7 +8660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.37612957, g: 0.37013885, b: 0.3974206, a: 1}
+  baseColor: {r: 0.12264765, g: 0.12753774, b: 0.72455317, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -8772,7 +8772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.44727737, g: 0.2537505, b: 0.06586615, a: 1}
+  baseColor: {r: 0.01363969, g: 0.00015566299, b: 0.002957887, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -8979,7 +8979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.016220214, g: 0.011352106, b: 0.014076192, a: 1}
+  baseColor: {r: 0.37935218, g: 0.37074652, b: 0.86032605, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -10099,7 +10099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.48945296, g: 0.419337, b: 0.6909272, a: 1}
+  baseColor: {r: 0.3124791, g: 0.16729878, b: 0.32181576, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
@@ -10496,7 +10496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d1197227956a347a8a2cea7e6d0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 0.1010454, g: 0.12372039, b: 0.12560941, a: 1}
+  baseColor: {r: 0.038718417, g: 0.39343202, b: 0.5624278, a: 1}
   cutoff: 0.5
   metallic: 0
   smoothness: 0.5
