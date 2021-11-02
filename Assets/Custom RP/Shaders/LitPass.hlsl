@@ -3,6 +3,7 @@
     
     #include "../ShaderLibrary/Common.hlsl"
     #include "../ShaderLibrary/Surface.hlsl"
+    #include "../ShaderLibrary/Shadows.hlsl"
     #include "../ShaderLibrary/Light.hlsl"
     #include "../ShaderLibrary/BRDF.hlsl"
     //BRDF is used in Lighting
@@ -78,12 +79,15 @@
         //base.rgb = abs(length(input.normalWS) - 1.0) * 10.0;
         
         Surface surface;
-        surface.normal = normalize(input.normalWS);
+        surface.position = input.positionWS;
+        surface.normal = normalize(input.normalWS);//normalize the interpolated normal
         surface.viewDirection = normalize(_WorldSpaceCameraPos - input.positionWS);
+        surface.depth = -TransformWorldToView(input.positionWS).z; //get the camera view depth from world position, then negative z
         surface.color = base.rgb;
         surface.alpha = base.a;
         surface.metallic = UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _Metallic);
         surface.smoothness = UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _Smoothness);
+        surface.dither = InterleavedGradientNoise(input.positionCS.xy, 0);//get the built in dither function, the second value is a rotation
         #if defined(_PREMULTIPLY_ALPHA)
             BRDF brdf = GetBRDF(surface, true);
         #else

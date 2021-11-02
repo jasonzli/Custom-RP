@@ -10,11 +10,13 @@ public class Lighting
     static int
         dirLightCountId = Shader.PropertyToID("_DirectionalLightCount"),
         dirLightColorsId = Shader.PropertyToID("_DirectionalLightColors"),
-        dirLightDirectionsId = Shader.PropertyToID("_DirectionalLightDirections");
+        dirLightDirectionsId = Shader.PropertyToID("_DirectionalLightDirections"),
+        dirLightShadowDataId = Shader.PropertyToID("_DirectionalLightShadowData");
 
     static Vector4[]
         dirLightColors = new Vector4[maxDirLightCount],
-        dirLightDirections = new Vector4[maxDirLightCount];
+        dirLightDirections = new Vector4[maxDirLightCount],
+        dirLightShadowData = new Vector4[maxDirLightCount];
     CommandBuffer buffer = new CommandBuffer
     {
         name = bufferName
@@ -22,14 +24,17 @@ public class Lighting
 
     CullingResults cullingResults;
 
+    Shadows shadows = new Shadows();
     public void Setup(
-        ScriptableRenderContext context, CullingResults cullingResults
+        ScriptableRenderContext context, CullingResults cullingResults,
+        ShadowSettings shadowSettings
         )
     {
         this.cullingResults = cullingResults;
         buffer.BeginSample(bufferName);
-        //SetupDirectionalLight();
+        shadows.Setup(context, cullingResults, shadowSettings);
         SetupLights();//Use the culling results to set up lights instead of searching for it
+        shadows.Render(); //After the lights are setup, render the shadow atlas, remember that objects will be lit in their own fragment step
         buffer.EndSample(bufferName);
         context.ExecuteCommandBuffer(buffer);
         buffer.Clear();
@@ -55,10 +60,22 @@ public class Lighting
         buffer.SetGlobalInt(dirLightCountId, visibleLights.Length);
         buffer.SetGlobalVectorArray(dirLightColorsId, dirLightColors);
         buffer.SetGlobalVectorArray(dirLightDirectionsId, dirLightDirections);
+        buffer.SetGlobalVectorArray(dirLightShadowDataId, dirLightShadowData);
     }
+
+    //This function sets the array of directional lights that we pass to the CBUFFER on the GPU
     void SetupDirectionalLight(int index, ref VisibleLight visibleLight)
     {
         dirLightColors[index] = visibleLight.finalColor; //not in linear space, must be converted in pipeline with GraphicsSettings.lightsUseLinearIntensity
         dirLightDirections[index] = -visibleLight.localToWorldMatrix.GetColumn(2); //the forward vector!
+        dirLightShadowData[index] =
+            shadows.ReserveDirectionalShadows(visibleLight.light, index);
+
+    }
+
+    //cleanup is called by camera, which is the thing calling the render
+    public void Cleanup()
+    {
+        shadows.Cleanup();
     }
 }

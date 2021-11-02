@@ -6,10 +6,25 @@ public class CustomShaderGUI : ShaderGUI
 {
 
     MaterialEditor editor;
-    Object[] materials;
+    Object[] materials; //an array for all the materials this applies to
     MaterialProperty[] properties;
-
+    enum ShadowMode
+    {
+        On, Clip, Dither, Off
+    }
     bool showPresets;
+
+    ShadowMode Shadows
+    {
+        set
+        {
+            if (SetProperty("_Shadows", (float)value))
+            {
+                SetKeyword("_SHADOWS_CLIP", value == ShadowMode.Clip);
+                SetKeyword("_SHADOWS_DITHER", value == ShadowMode.Dither);
+            }
+        }
+    }
 
     bool Clipping
     {
@@ -49,13 +64,15 @@ public class CustomShaderGUI : ShaderGUI
         }
     }
 
+
     public override void OnGUI(
         MaterialEditor materialEditor, MaterialProperty[] properties
     )
     {
+        EditorGUI.BeginChangeCheck(); //runs when something is changed
         base.OnGUI(materialEditor, properties);
         editor = materialEditor;
-        materials = materialEditor.targets;
+        materials = materialEditor.targets; //this is where we get all the materials of this type
         this.properties = properties;
 
         EditorGUILayout.Space();
@@ -67,8 +84,26 @@ public class CustomShaderGUI : ShaderGUI
             FadePreset();
             TransparentPreset();
         }
+
+        if (EditorGUI.EndChangeCheck())
+        {
+            SetShadowCasterPass();
+        }
     }
 
+    void SetShadowCasterPass()
+    {
+        MaterialProperty shadows = FindProperty("_Shadows", properties, false);
+        if (shadows == null || shadows.hasMixedValue) //this checks the MeshRenderer Cast Shadows option
+        {
+            return;
+        }
+        bool enabled = shadows.floatValue < (float)ShadowMode.Off;
+        foreach (Material m in materials)
+        {
+            m.SetShaderPassEnabled("ShadowCaster", enabled);
+        }
+    }
     void OpaquePreset()
     {
         if (PresetButton("Opaque"))

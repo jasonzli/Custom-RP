@@ -10,13 +10,16 @@ public class CustomRenderPipeline : RenderPipeline
     //configurable pipeline
     bool useDynamicBatching, useGPUInstancing;
 
+    ShadowSettings shadowSettings;
     //Add a constructor to the render pipeline to set values
     public CustomRenderPipeline(
-        bool useDynamicBatching, bool useGPUInstancing, bool useSRPBatcher
+        bool useDynamicBatching, bool useGPUInstancing, bool useSRPBatcher,
+        ShadowSettings shadowSettings
     )
     {
         this.useDynamicBatching = useDynamicBatching;
         this.useGPUInstancing = useGPUInstancing;
+        this.shadowSettings = shadowSettings;
         //Takes precedence over dynamic batching
         GraphicsSettings.useScriptableRenderPipelineBatching = useSRPBatcher;
         GraphicsSettings.lightsUseLinearIntensity = true;
@@ -31,7 +34,8 @@ public class CustomRenderPipeline : RenderPipeline
         foreach (Camera camera in cameras)
         {//This lets us divert different cameras to do different things later.
          //THis is the scriptable renderer of the URP essentially
-            renderer.Render(context, camera, useDynamicBatching, useGPUInstancing);
+            renderer.Render(context, camera, useDynamicBatching, useGPUInstancing,
+                shadowSettings);
         }
     }
 

@@ -21,6 +21,11 @@ public class ObjectGrid : MonoBehaviour
 
     List<GameObject> things;
 
+    void Awake()
+    {
+        things = new List<GameObject>();
+    }
+
     public void CreateObjects()
     {
         EmptyGrid();
