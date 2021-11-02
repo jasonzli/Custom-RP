@@ -19,7 +19,7 @@ That's absurd! Engines also have baked-in ideas about audiovisual content as wel
 - [x] [Setup](https://catlikecoding.com/unity/tutorials/custom-srp/custom-render-pipeline/)
 - [x] [Draw Calls](https://catlikecoding.com/unity/tutorials/custom-srp/draw-calls/)
 - [x] [Directional Lights](https://catlikecoding.com/unity/tutorials/custom-srp/directional-lights/)
-- [ ] [Directional Shadows](https://catlikecoding.com/unity/tutorials/custom-srp/directional-shadows/)
+- [x] [Directional Shadows](https://catlikecoding.com/unity/tutorials/custom-srp/directional-shadows/)
 - [ ] [Baked Light](https://catlikecoding.com/unity/tutorials/custom-srp/baked-light/)
 - [ ] [Shadow Masks](https://catlikecoding.com/unity/tutorials/custom-srp/shadow-masks/)
 - [ ] [LOD and Reflections](https://catlikecoding.com/unity/tutorials/custom-srp/lod-and-reflections/)
