@@ -193,6 +193,10 @@ public class Shadows
         int tileOffset = index * cascadeCount;
         Vector3 ratios = settings.directional.CascadeRatios;
 
+        //a culling factor for the shadow cascade sphere. Unity is more conservative that we are
+        float cullingFactor =
+            Mathf.Max(0f, 0.8f - settings.directional.cascadeFade * 0.2f);
+
         //anywhere from 1 to 4 cascades
         //we render this for # of cascades * # of lights        
         for (int i = 0; i < cascadeCount; i++)
@@ -201,6 +205,9 @@ public class Shadows
             light.visibleLightIndex, i, cascadeCount, ratios, tileSize,
             light.nearPlaneOffset, out Matrix4x4 viewMatrix, out Matrix4x4 projectionMatrix,
             out ShadowSplitData splitData);
+
+            //modulate the radius of a cascade's culling sphere.
+            splitData.shadowCascadeBlendCullingFactor = cullingFactor;
 
             shadowSettings.splitData = splitData; //splitData contains cull information about shadow casters
                                                   //set the texture coords per light (this is the annoying thing we get to defer in deferred renders)
