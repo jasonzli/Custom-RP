@@ -7,6 +7,7 @@ Shader "Custom RP/Lit"
         _BaseColor ("Color", Color) = (.5, .5, .5, 1.0)
         _Cutoff ("Alpha Cutoff", Range(0.0, 1.0)) = 0.5
         [Toggle(_CLIPPING)] _Clipping ("Alpha Clipping", Float) = 0
+        [KeywordEnum(On, Clip, Dither, Off)] _Shadows ("Shadows", Float) = 0
         _Metallic ("Metallic", Range(0, 1)) = 0
         _Smoothness ("Smoothness", Range(0, 1)) = .5
         [Toggle(_PREMULTIPLY_ALPHA)] _PremulAlpha ("Premultiply Alpha", Float) = 0
@@ -54,7 +55,7 @@ Shader "Custom RP/Lit"
             HLSLPROGRAM
             
             #pragma target 3.5
-            #pragma shader_feature _CLIPPING
+            #pragma shader_feature _ _SHADOWS_CLIP _SHADOWS_DITHER
             #pragma multi_compile_instancing
             #pragma vertex ShadowCasterPassVertex
             #pragma fragment ShadowCasterPassFragment

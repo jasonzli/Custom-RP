@@ -8,8 +8,23 @@ public class CustomShaderGUI : ShaderGUI
     MaterialEditor editor;
     Object[] materials;
     MaterialProperty[] properties;
-
+    enum ShadowMode
+    {
+        On, Clip, Dither, Off
+    }
     bool showPresets;
+
+    ShadowMode Shadows
+    {
+        set
+        {
+            if (SetProperty("_Shadows", (float)value))
+            {
+                SetKeyword("_SHADOWS_CLIP", value == ShadowMode.Clip);
+                SetKeyword("_SHADOWS_DITHER", value == ShadowMode.Dither);
+            }
+        }
+    }
 
     bool Clipping
     {
