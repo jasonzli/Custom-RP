@@ -35,6 +35,7 @@
     struct ShadowData
     {
         int cascadeIndex;
+        float cascadeBlend;
         float strength;
     };
     
@@ -56,6 +57,7 @@
     ShadowData GetShadowData(Surface surfaceWS)
     {
         ShadowData data;
+        data.cascadeBlend = 1.0;
         //we have the surface position depth, so we can choose to set it 1 or 0 depending on if we're in the cascades
         //calculate the fade by the set values
         data.strength = FadedShadowStrength(
@@ -70,12 +72,18 @@
             float distanceSqr = DistanceSquared(surfaceWS.position, sphere.xyz);
             if (distanceSqr < sphere.w) //sphere.w is square radius because we do that in Shadows.cs
             {
+                //calcaulate fade between blends
+                float fade = FadedShadowStrength(
+                    distanceSqr, _CascadeData[i].x, _ShadowDistanceFade.z
+                );
                 //check if we're in the last cascade and fade as necessary with square fade
                 if (i == _CascadeCount - 1)
                 {
-                    data.strength *= FadedShadowStrength(
-                        distanceSqr, _CascadeData[i].x /*inverse square*/, _ShadowDistanceFade.z
-                    );
+                    data.strength *= fade;
+                }
+                else
+                {
+                    data.cascadeBlend *= fade;
                 }
                 
                 break;
@@ -139,6 +147,20 @@
         ).xyz;
         //sample the shadow with a filter.
         float shadow = FilterDirectionalShadow(positionSTS); // direct sample is SampleDirectionalShadowAtlas(positionSTS);
+        
+        //sample between cascades
+        if (global.cascadeBlend < 1.0)
+        {
+            normalBias = surfaceWS.normal *
+            (directional.normalBias * _CascadeData[global.cascadeIndex + 1].y); //sample the next cascade
+            positionSTS = mul(
+                _DirectionalShadowMatrices[directional.tileIndex + 1], //sample next tile up in the cascade
+                float4(surfaceWS.position + normalBias, 1.0)
+            ).xyz;
+            shadow = lerp(
+                FilterDirectionalShadow(positionSTS), shadow, global.cascadeBlend
+            );
+        }
         
         //when strength is zero then it should be 1.0 (no attentuation of light)
         //strength is how much of the shadow we read, and not the amount of shadow
