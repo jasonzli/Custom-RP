@@ -85,7 +85,6 @@
                 {
                     data.cascadeBlend *= fade;
                 }
-                
                 break;
             }
         }
@@ -94,7 +93,18 @@
             //we might want to play with this
             data.strength = 0.0; //if we're out of the cascades then no shadow strenght at all
         }
-        data.cascadeIndex = i;
+        //if dither is defined, and blend the cascade if we're les than the dither
+        #if defined(_CASCADE_BLEND_DITHER)
+            else if (data.cascadeBlend < surfaceWS.dither)
+            {
+                i += 1;
+            }
+        #endif
+        //if soft is not defined, then do not blend
+        #if !defined(_CASCADE_BLEND_SOFT)
+            data.cascadeBlend = 1.0;
+        #endif
+        data.cascadeIndex = i; //the cascade that the shadow is in
         return data;
     }
     

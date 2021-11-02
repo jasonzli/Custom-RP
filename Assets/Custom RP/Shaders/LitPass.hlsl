@@ -87,6 +87,7 @@
         surface.alpha = base.a;
         surface.metallic = UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _Metallic);
         surface.smoothness = UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _Smoothness);
+        surface.dither = InterleavedGradientNoise(input.positionCS.xy, 0);//get the built in dither function, the second value is a rotation
         #if defined(_PREMULTIPLY_ALPHA)
             BRDF brdf = GetBRDF(surface, true);
         #else

@@ -26,6 +26,11 @@ public class Shadows
         "_DIRECTIONAL_PCF7",
     };
 
+    static string[] cascadeBlendKeywords = {
+        "_CASCADE_BLEND_SOFT",
+        "_CASCADE_BLEND_DITHER"
+    };
+
     //This is actually the split data that is computed
     static Vector4[]
         cascadeCullingSpheres = new Vector4[maxCascades],
@@ -163,7 +168,12 @@ public class Shadows
             ) //cascade fade value is an inverse square because cascades are calculated in squared values
         );
 
-        SetKeywords();
+        SetKeywords(
+            directionalFilterKeywords, (int)settings.directional.filter - 1
+        );
+        SetKeywords(
+            cascadeBlendKeywords, (int)settings.directional.cascadeBlend - 1
+        );
         buffer.SetGlobalVector( //we need this vector to do filtering
             shadowAtlasSizeId, new Vector4(atlasSize, 1f / atlasSize)
         );
@@ -282,19 +292,18 @@ public class Shadows
         return offset;
     }
 
-    void SetKeywords()
+    void SetKeywords(string[] keywords, int enabledIndex)
     {
-        int enabledIndex = (int)settings.directional.filter - 1;
         //enabled the correct keyword for tthe filter
-        for (int i = 0; i < directionalFilterKeywords.Length; i++)
+        for (int i = 0; i < keywords.Length; i++)
         {
             if (i == enabledIndex)
             {
-                buffer.EnableShaderKeyword(directionalFilterKeywords[i]);
+                buffer.EnableShaderKeyword(keywords[i]);
             }
             else
             {
-                buffer.DisableShaderKeyword(directionalFilterKeywords[i]);
+                buffer.DisableShaderKeyword(keywords[i]);
             }
         }
     }

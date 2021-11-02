@@ -32,7 +32,9 @@ Shader "Custom RP/Lit"
             //adds clipping as a feature to turn off for the shader
             #pragma shader_feature _CLIPPING
             #pragma shader_feature _PREMULTIPLY_ALPHA
+            //even though these are shadow compilations, we compile them because we sample shadows in fragment
             #pragma multi_compile _ _DIRECTIONAL_PCF3 _DIRECTIONAL_PCF5 _DIRECTIONAL_PCF7
+            #pragma multi_compile _ _CASCADE_BLEND_SOFT _CASCADE_BLEND_DITHER
             //generates two versions of the shader: one for instancing and one without.
             #pragma multi_compile_instancing
             
