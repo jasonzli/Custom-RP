@@ -61,6 +61,9 @@
         
         #if defined(_SHADOWS_CLIP)
             clip(base.a - UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _Cutoff));
+        #elif defined(_SHADOWS_DITHER)
+            float dither = InterleavedGradientNoise(input.posiitonCS.xy, 0);
+            clip(base.a - dither);
         #endif
     }
     
