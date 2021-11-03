@@ -6,6 +6,7 @@ Shader "Custom RP/Lit"
         _BaseMap ("Texture", 2D) = "white" { }//"white" is the default unity white texture
         _BaseColor ("Color", Color) = (.5, .5, .5, 1.0)
         _Cutoff ("Alpha Cutoff", Range(0.0, 1.0)) = 0.5
+        [Enum(UnityEngine.Rendering.CullMode)] _Cull ("Cull Mode", Float) = 2
         [Toggle(_CLIPPING)] _Clipping ("Alpha Clipping", Float) = 0
         [KeywordEnum(On, Clip, Dither, Off)] _Shadows ("Shadows", Float) = 0
         [Toggle(_RECEIVE_SHADOWS)] _ReceiveShadows ("Receive Shadows", Float) = 1
@@ -28,6 +29,7 @@ Shader "Custom RP/Lit"
             // src = SrcAlpha and dst OneMinusSrcAlpha is normal transparency
             Blend [_SrcBlend] [_DstBlend]
             ZWrite [_ZWrite]
+            Cull [_Cull]
             
             HLSLPROGRAM
             
@@ -53,6 +55,7 @@ Shader "Custom RP/Lit"
         {
             Tags { "LightMode" = "ShadowCaster" }
             
+            Cull [_Cull]
             ColorMask 0
             
             HLSLPROGRAM

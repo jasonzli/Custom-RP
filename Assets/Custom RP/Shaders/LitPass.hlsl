@@ -64,7 +64,10 @@
         return output;
     }
     
-    float4 LitPassFragment(Varyings input): SV_TARGET
+    float4 LitPassFragment(
+        //FRONT_FACE_SEMANTIC is a macro from the core library because it SV_FRONTFACE is api dependent
+        Varyings input, FRONT_FACE_TYPE isFrontFace: FRONT_FACE_SEMANTIC
+    ): SV_TARGET
     {
         UNITY_SETUP_INSTANCE_ID(input);
         float4 baseMap = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, input.baseUV);
@@ -81,6 +84,7 @@
         Surface surface;
         surface.position = input.positionWS;
         surface.normal = normalize(input.normalWS);//normalize the interpolated normal
+        surface.normal = IS_FRONT_VFACE(isFrontFace, surface.normal, -surface.normal);//reverse normal if backface
         surface.viewDirection = normalize(_WorldSpaceCameraPos - input.positionWS);
         surface.depth = -TransformWorldToView(input.positionWS).z; //get the camera view depth from world position, then negative z
         surface.color = base.rgb;
