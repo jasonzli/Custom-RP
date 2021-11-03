@@ -27,6 +27,7 @@
     UNITY_DEFINE_INSTANCED_PROP(float, _Cutoff)
     UNITY_DEFINE_INSTANCED_PROP(float, _Metallic)
     UNITY_DEFINE_INSTANCED_PROP(float, _Smoothness)
+    UNITY_DEFINE_INSTANCED_PROP(float, _DitherDistance)
     UNITY_INSTANCING_BUFFER_END(UnityPerMaterial)
     
     struct Attributes
@@ -74,6 +75,16 @@
         float4 baseColor = UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _BaseColor);
         float4 base = baseMap * baseColor;
         
+        #if defined(_DISTANCE_DITHER)
+            //let's first clip based on some arbitrary distance
+            float distance = DistanceSquared(input.positionWS, _WorldSpaceCameraPos);
+            //get the interleavedgradientnoise of the fragment screenposition
+            float noise = InterleavedGradientNoise(input.positionCS.xy, 0.);
+            float distanceRatio = saturate(distance / 1.);
+            float inverseDistanceRatio = 1.0 - distanceRatio;
+            noise = noise - inverseDistanceRatio;
+            clip(noise);
+        #endif
         #if defined(_CLIPPING)
             clip(base.a - UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, _Cutoff));
         #endif
@@ -98,6 +109,7 @@
             BRDF brdf = GetBRDF(surface);
         #endif
         float3 color = GetLighting(surface, brdf);
+        
         return float4(color, surface.alpha);
     }
     
