@@ -12,7 +12,7 @@ Shader "Custom RP/Lit"
         [Enum(UnityEngine.Rendering.CullMode)] _Cull ("Cull Mode", Float) = 2
         [Toggle(_CLIPPING)] _Clipping ("Alpha Clipping", Float) = 0
         [Toggle(_DISTANCE_DITHER)] _DistanceDither ("Distance Based Dither", Float) = 0
-        _DitherDistance ("Dither Distance", Range(0, 4)) = 1
+        //_DitherDistance ("Dither Distance", Range(0, 4)) = 1 //can't use this without breaking per object materials
         
         [KeywordEnum(On, Clip, Dither, Off)] _Shadows ("Shadows", Float) = 0
         [Toggle(_RECEIVE_SHADOWS)] _ReceiveShadows ("Receive Shadows", Float) = 1

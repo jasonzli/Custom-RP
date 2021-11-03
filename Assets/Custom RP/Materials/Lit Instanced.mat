@@ -9,7 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Lit Instanced
   m_Shader: {fileID: 4800000, guid: c74c47a78237d5246bf303ae437c7722, type: 3}
-  m_ShaderKeywords: _CLIPPING _PREMULTIPLY_ALPHA _RECEIVE_SHADOWS _SHADOWS_CLIP
+  m_ShaderKeywords: _CLIPPING _DISTANCE_DITHER _PREMULTIPLY_ALPHA _RECEIVE_SHADOWS
+    _SHADOWS_CLIP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -62,8 +63,11 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _Clipping: 1
-    - _Cutoff: 0.245
+    - _Cull: 0
+    - _Cutoff: 0
     - _DetailNormalMapScale: 1
+    - _DistanceDither: 1
+    - _DitherDistance: 1
     - _DstBlend: 10
     - _GlossMapScale: 1
     - _Glossiness: 0.5

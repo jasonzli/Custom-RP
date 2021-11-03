@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Cube 1
   m_Shader: {fileID: 4800000, guid: c74c47a78237d5246bf303ae437c7722, type: 3}
-  m_ShaderKeywords: _SHADOWS_OFF
+  m_ShaderKeywords: _SHADOWS_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -62,8 +62,11 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _Clipping: 0
+    - _Cull: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _DistanceDither: 0
+    - _DitherDistance: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -74,7 +77,7 @@ Material:
     - _Parallax: 0.02
     - _PremulAlpha: 0
     - _ReceiveShadows: 1
-    - _Shadows: 3
+    - _Shadows: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1

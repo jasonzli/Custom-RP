@@ -27,7 +27,6 @@
     UNITY_DEFINE_INSTANCED_PROP(float, _Cutoff)
     UNITY_DEFINE_INSTANCED_PROP(float, _Metallic)
     UNITY_DEFINE_INSTANCED_PROP(float, _Smoothness)
-    UNITY_DEFINE_INSTANCED_PROP(float, _DitherDistance)
     UNITY_INSTANCING_BUFFER_END(UnityPerMaterial)
     
     struct Attributes
